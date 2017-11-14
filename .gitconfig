@@ -1,0 +1,54 @@
+[user]
+	email = lee.saville@americanfinancing.net
+	name = Lee Saville
+[push]
+	default = simple
+[core]
+	editor = vim
+  excludesfile = /home/lee/.gitignore_global
+	autocrlf = input
+[alias]
+  co = checkout
+  ci = commit
+  cim = commit -am
+  empty-commit = commit --allow-empty -m
+  ec = commit --allow-empty -m
+  st = status
+  sh = stash
+  sha = stash apply
+  br = branch -vv
+  cbr = symbolic-ref --short HEAD
+  cbrv = log --pretty=format:'%C(yellow)%d  %Cred%h %Creset%subject %Cgreen(%ad)' --abbrev-commit --date=short -1
+  rb = rebase
+  cp = cherry-pick
+  #hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+  #lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --date-order --max-count=20
+  #files = show --pretty="format:" --name-status bd61ad98
+  files = diff-tree --no-commit-id -r --name-status
+  set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+[pull]
+	rebase = false
+[color]
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+  upstream = blue bold
+  plain = cyan
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  header = cyan dim bold
+  added = green
+  changed = yellow
+  untracked = cyan
+  deleted = red
+  branch = yellow

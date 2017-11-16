@@ -15,6 +15,7 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'rakr/vim-one'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'thoughtbot/vim-rspec'
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -95,6 +96,12 @@ set incsearch
 
 " " nerdtree access
 nnoremap <leader>n :NERDTreeToggle<cr>
+
+"RSpec.vim mappings
+map <leader>t :call RunCurrentSpecFile()<CR>
+map <leader>s :call RunNearestSpec()<CR>
+map <leader>l :call RunLastSpec()<CR>
+map <leader>a :call RunAllSpecs()<CR>
 
 "Colorscheme
 colorscheme gruvbox

@@ -91,6 +91,7 @@ set autoindent
 set mouse=a
 
 set pastetoggle=<F2>
+:map <F3> :nohl<CR>
 set showcmd
 set showmode
 set hlsearch

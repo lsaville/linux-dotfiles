@@ -79,6 +79,8 @@ nnoremap <leader>zz :call VCenterCursor()<CR>
 " Having both relative and absolute line numbering
 set relativenumber
 set number
+set cursorcolumn
+set colorcolumn=80
 
 " " kill the swp files
 set nobackup

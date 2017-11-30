@@ -41,9 +41,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+x exec i3lock --color 475263
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec rofi -show run
 
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -fullscreen -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18" -kb-accept-entry "Return" -kb-row-up "Control+k" -kb-row-down "Control+j"
+bindsym $mod+d exec rofi -show run -lines 3 -eh 1 -padding 300 -width 100 -fullscreen -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18" -kb-accept-entry "Return" -kb-row-up "Control+k" -kb-row-down "Control+j"
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -102,18 +102,18 @@ bindsym $mod+a focus parent
 # Workspace variables
 #browser
 set $workspace1 "1: "
-set $workspace2 "2: "
-set $workspace3 "3: "
-set $workspace4 "4: "
+set $workspace2 "2: "
+set $workspace6 "6: "
+set $workspace7 "7: "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
@@ -121,25 +121,31 @@ bindsym $mod+0 workspace 10
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 workspace $workspace1 output HDMI-1
-workspace $workspace2 output HDMI-2
+workspace $workspace2 output HDMI-1
 workspace $workspace3 output HDMI-1
-workspace $workspace4 output HDMI-2
+workspace $workspace4 output HDMI-1
+workspace $workspace5 output HDMI-1
+workspace $workspace6 output HDMI-2
+workspace $workspace7 output HDMI-2
+workspace $workspace8 output HDMI-2
+workspace $workspace9 output HDMI-2
+workspace $workspace0 output HDMI-2
 
 #Application auto-assignment
 assign [class="Firefox"] $workspace1
-assign [class="Gnome-terminal"] $workspace2
-assign [class="Slack"] $workspace3
-for_window [class="Spotify"] move to workspace $workspace4
+assign [class="Slack"] $workspace2
+assign [class="Gnome-terminal"] $workspace6
+for_window [class="Spotify"] move to workspace $workspace7
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

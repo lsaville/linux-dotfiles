@@ -42,7 +42,8 @@ bindsym $mod+x exec i3lock --color 475263
 
 # start dmenu (a program launcher)
 
-bindsym $mod+d exec rofi -show run -lines 3 -eh 1 -padding 300 -width 100 -fullscreen -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18" -kb-accept-entry "Return" -kb-row-up "Control+k" -kb-row-down "Control+j"
+bindsym $mod+d exec rofi -show run
+#bindsym $mod+d exec rofi -show run -lines 3 -eh 1 -padding 300 -width 100 -fullscreen -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18" -kb-accept-entry "Return" -kb-row-up "Control+k" -kb-row-down "Control+j"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -217,5 +218,6 @@ exec firefox
 exec gnome-terminal
 exec slack
 exec spotify
+exec compton -f
 
 exec_always feh --bg-scale /home/.cache/wallpaper/ravn.jpg

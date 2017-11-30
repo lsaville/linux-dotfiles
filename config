@@ -220,4 +220,4 @@ exec slack
 exec spotify
 exec compton -f
 
-exec_always feh --bg-scale /home/.cache/wallpaper/ravn.jpg
+exec_always --no-startup-id feh --bg-scale ~/.cache/wallpaper/ravn.jpg

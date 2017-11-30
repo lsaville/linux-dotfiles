@@ -1,0 +1,29 @@
+!rofi
+#define bg_color 	          #2f343f
+#define inactive_bg_color   #2f343f
+#define text_color          #f3f4f5
+#define inactive_text_color #676e7d
+#define urgent_bg_color     #e53935
+
+#define bg_color_trans 	          argb:bf343f2f
+#define inactive_bg_color_trans   argb:bf343f2f
+#define urgent_bg_color_trans     argb:bf3935e5
+
+rofi.color-enabled:   true
+rofi.lines:           3
+rofi.eh:              1
+rofi.bw:              0
+rofi.separator-style: none
+rofi.padding:         300
+rofi.width:           100
+rofi.fullscreen:      true
+!                     bg        border    separator
+rofi.color-window:    bg_color, bg_color, bg_color
+!                     bg        fg          bg_alt    hl_bg     hl_fg
+rofi.color-normal:    bg_color, text_color, bg_color, bg_color, #9575cd
+rofi.color-active:    bg_color, text_color, bg_color, bg_color, #9575cd
+rofi.color-urgent:    bg_color, text_color, bg_color, bg_color, #9575cd
+rofi.font:            System San Francisco Display 18
+rofi.kb-accept-entry: Return
+rofi.kb-row-up:       Control+k
+rofi.kb-row-down:     Control+j

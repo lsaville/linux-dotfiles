@@ -15,7 +15,6 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'rakr/vim-one'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'thoughtbot/vim-rspec'
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -68,6 +67,10 @@ endif
 " toggle between VCenterCursor and scrolloff=0
 nnoremap <leader>zz :call VCenterCursor()<CR>
 
+" cruise buffer list
+nmap <C-f> :bn<CR>
+nmap <C-d> :bp<CR>
+
 " " keymap for easy pane motion, apparently obviated by the
 " vim-tmux-navigation
 
@@ -77,7 +80,6 @@ nnoremap <leader>zz :call VCenterCursor()<CR>
 "nnoremap <C-H> <C-W><C-H>
 
 " Having both relative and absolute line numbering
-set relativenumber
 set number
 set cursorcolumn
 set colorcolumn=80
@@ -99,12 +101,6 @@ set incsearch
 
 " " nerdtree access
 nnoremap <leader>n :NERDTreeToggle<cr>
-
-"RSpec.vim mappings
-map <leader>t :call RunCurrentSpecFile()<CR>
-map <leader>s :call RunNearestSpec()<CR>
-map <leader>l :call RunLastSpec()<CR>
-map <leader>a :call RunAllSpecs()<CR>
 
 "Colorscheme
 colorscheme gruvbox

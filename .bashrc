@@ -169,3 +169,4 @@ export PATH="$HOME/bin:$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 PATH=/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/.rbenv/bin:/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/bin:/home/lee/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/lee/.phantomjs/phantomjs/bin
 export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
+export PATH="$PATH:/usr/local/bin/elixir"

@@ -13,6 +13,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'rakr/vim-one'
+Plugin 'mhartington/oceanic-next'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " " All of your Plugins must be added before the following line
@@ -103,12 +104,17 @@ set incsearch
 nnoremap <leader>n :NERDTreeToggle<cr>
 
 "Colorscheme
-colorscheme gruvbox
+colorscheme OceanicNext
 autocmd Colorscheme * highlight Normal ctermbg=None
 autocmd Colorscheme * highlight NonText ctermbg=None
 
 " Switch syntax highlighting on
 syntax on
+" oceanic settings
+syntax enable
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 "Set background as dark
 set background=dark

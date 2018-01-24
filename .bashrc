@@ -146,7 +146,7 @@ alias gs="git status"
 
 alias nuke="bundle exec rake db:drop db:create db:migrate db:seed db:test:prepare"
 alias be="bundle exec"
-alias reload='source ~/.bash_profile'
+alias reload='source ~/.bashrc'
 alias o="cs git/optimizely_server/public/optimizely"
 
 #combo functions from Sal Espinosas bash profile
@@ -163,8 +163,9 @@ function da () {
   gd "$@" && ga "$@"
 }
 
-export PATH="$HOME/bin:$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-PATH=/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/.rbenv/bin:/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/bin:/home/lee/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/lee/.phantomjs/phantomjs/bin
+#PATH=/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/.rbenv/bin:/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/bin:/home/lee/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/lee/.phantomjs/phantomjs/bin
 export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
-export PATH="$PATH:/usr/local/bin/elixir"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

@@ -5,7 +5,7 @@
 
 SESSION=$USER
 
-# Create main three pane session large on left, horizontal split 
+# Create main three pane session large on left, horizontal split
 # slightly asymmetrically on the left
 
 tmux -2 new-session -d -s $SESSION -n 'Main'

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+tmux new-session -d
+tmux split-window -h
+tmux split-window -v -p 45
+tmux -2 attach-session -d

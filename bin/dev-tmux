@@ -1,6 +1,13 @@
 #!/bin/sh
+SESSION=$USER
 
-tmux new-session -d
+tmux -2 new-session -d -s $SESSION
+tmux new-window -t $SESSION:1 -n 'main'
 tmux split-window -h
 tmux split-window -v -p 45
-tmux -2 attach-session -d
+
+tmux new-window -t $SESSION:2 -n 'server'
+
+tmux select-window -t $SESSION:1
+
+tmux -2 attach-session -t $SESSION

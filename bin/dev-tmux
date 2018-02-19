@@ -19,7 +19,7 @@ tmux send-keys 'bin/rs' C-m
 
 # Select the main window
 
-tmux select-window -t 'main'
+tmux select-window -t 'Main'
 
 # Attach session
 

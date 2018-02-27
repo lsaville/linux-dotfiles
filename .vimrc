@@ -121,3 +121,9 @@ set background=dark
 
 "Don't show the splash screen on startup
 set shortmess=I
+
+" set emacs style command line shortcuts
+:cnoremap <C-A> <Home>
+:cnoremap <C-F> <Right>
+:cnoremap <C-B> <Left>
+:cnoremap <C-E> <End>

@@ -127,3 +127,6 @@ set shortmess=I
 :cnoremap <C-F> <Right>
 :cnoremap <C-B> <Left>
 :cnoremap <C-E> <End>
+
+"show hidden files in nerdtree
+let NERDTreeShowHidden=1

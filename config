@@ -32,7 +32,7 @@ font pango:System San Francisco Display 13
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -229,7 +229,7 @@ bar {
 
 exec --no-startup-id i3-msg "workspace $workspace1; exec firefox"
 exec slack
-exec --no-startup-id i3-msg "workspace $workspace6; exec gnome-terminal"
+exec --no-startup-id i3-msg "workspace $workspace6; exec alacritty"
 exec spotify
 exec compton -f
 

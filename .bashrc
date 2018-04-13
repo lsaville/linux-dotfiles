@@ -127,6 +127,10 @@ if ! shopt -oq posix; then
 fi
 
 
+# set vim as default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 # The following ported from my macbook
 # [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 

@@ -30,6 +30,7 @@ nmap <C-d> :bp<CR>
 set number
 set cursorcolumn
 set colorcolumn=80
+set backspace=indent,eol,start
 
 " " kill the swp files
 set nobackup

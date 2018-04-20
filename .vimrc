@@ -1,6 +1,10 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -16,18 +20,15 @@ Plugin 'vim-airline/vim-airline'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SETTINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Makes leader a space
 let mapleader = " "
 
-" Smarter tab line via vim-airline readme
-let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='oceanicnext'
-
-" cruise buffer list
-nmap <C-f> :bn<CR>
-nmap <C-d> :bp<CR>
-
 set number
+set relativenumber
 set cursorcolumn
 set colorcolumn=80
 set backspace=indent,eol,start
@@ -47,8 +48,15 @@ set showmode
 set hlsearch
 set incsearch
 
-" " nerdtree access
-nnoremap <leader>n :NERDTreeToggle<cr>
+"Set background as dark
+set background=dark
+
+"Don't show the splash screen on startup
+set shortmess=I
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Colorscheme
 colorscheme OceanicNext
@@ -63,11 +71,17 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-"Set background as dark
-set background=dark
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AIRLINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"Don't show the splash screen on startup
-set shortmess=I
+" Smarter tab line via vim-airline readme
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='oceanicnext'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAPPINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " set emacs style command line shortcuts
 :cnoremap <C-A> <Home>
@@ -75,8 +89,26 @@ set shortmess=I
 :cnoremap <C-B> <Left>
 :cnoremap <C-E> <End>
 
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" cruise buffer list
+nmap <C-f> :bn<CR>
+nmap <C-d> :bp<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTREE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" " nerdtree access
+nnoremap <leader>n :NERDTreeToggle<cr>
+
 "show hidden files in nerdtree
 let NERDTreeShowHidden=1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AG
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " The Silver Searcher
 if executable('ag')
@@ -89,6 +121,3 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>

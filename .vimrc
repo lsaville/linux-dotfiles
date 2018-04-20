@@ -42,7 +42,6 @@ set autoindent
 set mouse=a
 
 set pastetoggle=<F2>
-:map <F3> :nohl<CR>
 set showcmd
 set showmode
 set hlsearch
@@ -83,6 +82,8 @@ let g:airline_theme='oceanicnext'
 " MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+:noremap <F3> :nohl<CR>
+
 " set emacs style command line shortcuts
 :cnoremap <C-A> <Home>
 :cnoremap <C-F> <Right>
@@ -93,8 +94,12 @@ let g:airline_theme='oceanicnext'
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " cruise buffer list
-nmap <C-f> :bn<CR>
-nmap <C-d> :bp<CR>
+nnoremap <C-f> :bn<CR>
+nnoremap <C-d> :bp<CR>
+
+" experimental learnvimscriptthehardway mappings
+" capitalize word in normal mode
+nnoremap <c-u>  viwU
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTREE

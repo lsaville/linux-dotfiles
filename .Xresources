@@ -27,3 +27,4 @@ rofi.font:            System San Francisco Display 18
 rofi.kb-accept-entry: Return
 rofi.kb-row-up:       Control+k
 rofi.kb-row-down:     Control+j
+

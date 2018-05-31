@@ -28,7 +28,6 @@ filetype plugin indent on    " required
 let mapleader = " "
 
 set number
-set relativenumber
 set cursorcolumn
 set colorcolumn=80
 set backspace=indent,eol,start
@@ -83,6 +82,7 @@ let g:airline_theme='oceanicnext'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 :noremap <F3> :nohl<CR>
+:noremap <F4> :set relativenumber!<CR>
 
 " set emacs style command line shortcuts
 :cnoremap <C-A> <Home>

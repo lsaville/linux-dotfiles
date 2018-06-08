@@ -52,6 +52,10 @@ set background=dark
 "Don't show the splash screen on startup
 set shortmess=I
 
+"Change list chars
+set listchars=tab:»·,trail:·,space:.,eol:¬
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,6 +104,9 @@ nnoremap <C-d> :bp<CR>
 " experimental learnvimscriptthehardway mappings
 " capitalize word in normal mode
 nnoremap <c-u>  viwU
+
+" from vimcasts
+nnoremap <leader>l :set list!<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTREE

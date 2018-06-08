@@ -127,6 +127,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Don't clear the screen after quitting a man page
+export MANPAGER="less -X";
 
 # set vim as default editor
 export VISUAL=vim

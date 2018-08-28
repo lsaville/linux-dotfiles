@@ -317,3 +317,5 @@ export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 eval "$(rbenv init -)"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

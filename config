@@ -38,8 +38,6 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # lock the screen
-#bindsym $mod+x exec i3lock --color "$bg-color"
-#bindsym $mod+x exec i3lock -i ~/Downloads/meow.png
 bindsym $mod+x exec /home/$USER/.config/i3/lock
 
 # Media Keys

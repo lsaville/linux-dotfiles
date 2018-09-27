@@ -310,20 +310,6 @@ function da () {
   gd "$@" && ga "$@"
 }
 
-#git confirm --hard on reset
-git() {
-    set -e -u
-    if [ $# -ge 2 ]; then
-        if [ "x$1" = "xreset" -a "x$2" = "x--hard" ]; then
-            echo 'Sure?'
-            read resp || return $?
-            test "x$resp" = "xyes" || return 0
-        fi
-    fi
-    command git "$@"
-}
-
-
 #PATH=/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/.rbenv/bin:/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/bin:/home/lee/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/lee/.phantomjs/phantomjs/bin
 export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 

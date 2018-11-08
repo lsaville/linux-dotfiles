@@ -14,6 +14,8 @@ HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+# force history to read/write on every command
+export PROMPT_COMMAND="history -a; history -n"
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000

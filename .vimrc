@@ -29,6 +29,7 @@ let mapleader = " "
 
 set number
 set cursorcolumn
+set cursorline
 set colorcolumn=80
 set backspace=indent,eol,start
 
@@ -54,6 +55,9 @@ set shortmess=I
 
 "Change list chars
 set listchars=tab:»·,trail:·,space:.,eol:¬
+
+"With long filenames make the ENTER to continue business less likely
+set cmdheight=3
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

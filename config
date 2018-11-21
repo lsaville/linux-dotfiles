@@ -237,6 +237,7 @@ exec slack
 exec --no-startup-id i3-msg "workspace $workspace6; exec alacritty"
 exec spotify
 exec compton -f
+exec unclutter --timeout 1 --fork
 
 #set background image
 exec_always --no-startup-id feh --bg-scale ~/.cache/wallpaper/ravn.jpg

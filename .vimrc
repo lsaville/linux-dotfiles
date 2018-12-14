@@ -102,8 +102,12 @@ let g:airline_theme='oceanicnext'
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " cruise buffer list
-nnoremap <C-f> :bn<CR>
-nnoremap <C-d> :bp<CR>
+" nnoremap <C-f> :bn<CR>
+" nnoremap <C-d> :bp<CR>
+" Reinstate natural normal <C-f> and <C-d> behavior
+" this is for the linux env where alt+seemingly-anything == <esc>
+nnoremap <esc>f :bn<CR>
+nnoremap <esc>d :bp<CR>
 
 " experimental learnvimscriptthehardway mappings
 " capitalize word in normal mode

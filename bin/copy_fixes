@@ -1,0 +1,8 @@
+#! /bin/bash
+set -xe
+
+ag -l '[[:space:]]*$' | xargs -r sed -i 's/[[:space:]]*$//'
+ag -l '’' | xargs -r sed -i "s/’/'/g"
+ag -l '“' | xargs -r sed -i 's/“/"/g'
+ag -l '”' | xargs -r sed -i 's/”/"/g'
+ag -l '–' | xargs -r sed -i 's/–/—/g'

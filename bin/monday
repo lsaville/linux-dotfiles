@@ -1,0 +1,56 @@
+#!/usr/bin/expect -f
+
+spawn cap qa1 puma:restart
+
+expect "Please enter whether you are deploying from a branch (y/n): "
+send "y\r"
+
+expect "Please enter whether you are on location at AFC? (y/n): "
+send "y\r"
+
+
+#spawn cap qa2 puma:restart
+#
+#expect "Please enter whether you are deploying from a branch (y/n): "
+#send "y\r"
+#
+#expect "Please enter whether you are on location at AFC? (y/n): "
+#send "y\r"
+#
+#
+#spawn cap qa3 puma:restart
+#
+#expect "Please enter whether you are deploying from a branch (y/n): "
+#send "y\r"
+#
+#expect "Please enter whether you are on location at AFC? (y/n): "
+#send "y\r"
+#
+#
+#spawn cap qa4 puma:restart
+#
+#expect "Please enter whether you are deploying from a branch (y/n): "
+#send "y\r"
+#
+#expect "Please enter whether you are on location at AFC? (y/n): "
+#send "y\r"
+#
+#
+#spawn cap qa5 puma:restart
+#
+#expect "Please enter whether you are deploying from a branch (y/n): "
+#send "y\r"
+#
+#expect "Please enter whether you are on location at AFC? (y/n): "
+#send "y\r"
+#
+#
+#spawn cap qa6 puma:restart
+#
+#expect "Please enter whether you are deploying from a branch (y/n): "
+#send "y\r"
+#
+#expect "Please enter whether you are on location at AFC? (y/n): "
+#send "y\r"
+
+exit

@@ -1,0 +1,26 @@
+#!/usr/bin/expect -f
+
+set timeout 99999
+set BRANCH [lindex $argv 0]
+set ENV [lindex $argv 1]
+
+puts $BRANCH
+puts $ENV
+
+spawn cap $ENV deploy
+
+expect -exact "Please enter whether you are deploying from a branch (y/n): "
+
+send -- "y\r"
+
+if { $BRANCH != "staging" } {
+  expect -exact "Please enter whether you are on location at AFC? (y/n): "
+
+  send -- "y\r"
+}
+
+expect -exact "Please enter branch ($BRANCH): "
+
+send -- "\r"
+
+expect eof

@@ -318,6 +318,9 @@ export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+#export NODEJS_HOME=/usr/local/lib/nodejs/node-v11.6.0-linux-x64/bin
+#export PATH=$NODEJS_HOME:$PATH
+
 eval "$(rbenv init -)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

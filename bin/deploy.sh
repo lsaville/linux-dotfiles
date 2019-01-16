@@ -5,5 +5,5 @@ if [ "$1" != "" ]; then
 
   expect -f deploy.exp $BRANCH $1
 else
-  echo "Missing an environment arg"
+  echo "Missing the env arg"
 fi

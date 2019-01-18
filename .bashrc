@@ -323,4 +323,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 eval "$(rbenv init -)"
 
+source ~/.meow
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -40,6 +40,10 @@ bindsym $mod+Shift+q kill
 # lock the screen
 bindsym $mod+x exec /home/$USER/.config/i3/lock
 
+# stop and start notifications
+bindsym $mod+c exec "notify-send 'DUNST_COMMAND_PAUSE'"
+bindsym $mod+b exec "notify-send 'DUNST_COMMAND_RESUME'"
+
 # Media Keys
 # Pulse Audio controls
 # Auto set volume to reasonable level on start up

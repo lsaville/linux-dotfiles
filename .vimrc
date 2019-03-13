@@ -23,6 +23,8 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" determine system to smooth out mac/linux wrinkles
+let s:uname = substitute(system("uname -s"), '\n', '', '')
 
 " Makes leader a space
 let mapleader = " "
@@ -105,9 +107,16 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " nnoremap <C-f> :bn<CR>
 " nnoremap <C-d> :bp<CR>
 " Reinstate natural normal <C-f> and <C-d> behavior
-" this is for the linux env where alt+seemingly-anything == <esc>
-nnoremap <esc>f :bn<CR>
-nnoremap <esc>d :bp<CR>
+" The strange chars for Darwin are the output for alt+f and alt+d
+" The strange chars for linux are the output for alt+f and alt+d
+" In the linux env alt+seemingly-anything == <esc>
+if s:uname == "Darwin"
+  nnoremap ƒ :bn<CR>
+  nnoremap ∂ :bp<CR>
+else
+  nnoremap <esc>f :bn<CR>
+  nnoremap <esc>d :bp<CR>
+endif
 
 " experimental learnvimscriptthehardway mappings
 " capitalize word in normal mode
@@ -155,6 +164,6 @@ endif
 " EXPERIMENTAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+"command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
-nnoremap \ :Ag<SPACE>
+"nnoremap \ :Ag<SPACE>

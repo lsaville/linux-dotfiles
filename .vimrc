@@ -123,9 +123,9 @@ endif
 nnoremap <c-u>  viwU
 
 " comment jsx
-vnoremap <leader>cc :s/\(\s*\)\(.*\)/\1{*\/\2*\/}/ \| :nohl<CR>
+vnoremap <leader>cc :s/\(\s*\)\(.*\)/\1{\/*\2*\/}/ \| :nohl<CR>
 " uncomment jsx
-vnoremap <leader>cu :s/\(\s*\){\*\/\(.*\)\*\/}/\1\2<CR>
+vnoremap <leader>cu :s/\(\s*\){\/\*\(.*\)\*\/}/\1\2<CR>
 
 " sort
 vnoremap <leader>s :sor<CR>

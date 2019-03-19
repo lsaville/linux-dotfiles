@@ -94,6 +94,9 @@ let g:airline_theme='oceanicnext'
 :noremap <F3> :nohl<CR>
 :noremap <F4> :set relativenumber!<CR>
 
+" Change px to rems
+:nnoremap <F1> :.! awk 'BEGIN { FPAT = "([[:space:]]*[[:alnum:][:punct:][:digit:]]+)"; } { print $1 " " $2/16.0 "rem;" }'<CR>
+
 " set emacs style command line shortcuts
 :cnoremap <C-A> <Home>
 :cnoremap <C-F> <Right>

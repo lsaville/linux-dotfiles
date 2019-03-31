@@ -95,6 +95,12 @@ let g:airline_theme='oceanicnext'
 :noremap <F3> :nohl<CR>
 :noremap <F4> :set relativenumber!<CR>
 
+" Change px to rems
+:nnoremap <F1> :.! awk 'BEGIN { FPAT = "([[:space:]]*[[:alnum:][:punct:][:digit:]]+)"; } { print $1 " " $2/16.0 "rem;" }'<CR>
+
+" Run spec in tmux pane 1
+:nnoremap <F5> :exe ":silent ! tmux send-keys -t 1 'be rspec %' Enter" \| redraw!<CR>
+
 " set emacs style command line shortcuts
 :cnoremap <C-A> <Home>
 :cnoremap <C-F> <Right>
@@ -124,9 +130,9 @@ endif
 nnoremap <c-u>  viwU
 
 " comment jsx
-vnoremap <leader>cc :s/\(\s*\)\(.*\)/\1{*\/\2*\/}/ \| :nohl<CR>
+vnoremap <leader>cc :s/\(\s*\)\(.*\)/\1{\/*\2*\/}/ \| :nohl<CR>
 " uncomment jsx
-vnoremap <leader>cu :s/\(\s*\){\*\/\(.*\)\*\/}/\1\2<CR>
+vnoremap <leader>cu :s/\(\s*\){\/\*\(.*\)\*\/}/\1\2<CR>
 
 " sort
 vnoremap <leader>s :sor<CR>

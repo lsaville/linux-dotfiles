@@ -140,6 +140,11 @@ vnoremap <leader>s :sor<CR>
 " from vimcasts
 nnoremap <leader>l :set list!<CR>
 
+" From youtube video... primitive snippet
+" https://youtu.be/XA2WjJbmmoM
+" https://github.com/changemewtf/dotfiles/blob/master/vim/.vimrc
+nnoremap <leader>msg :-1read $HOME/.vim/final-commit-msg.txt<CR>C
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTREE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sed -i 's/\(@app.loan_in_progress_abort!\)/#\1/' app/models/cas_router.rb

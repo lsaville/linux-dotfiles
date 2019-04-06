@@ -125,7 +125,7 @@ bindsym $mod+a focus parent
 # Workspace variables
 #browser
 set $workspace1 "1: "
-set $workspace2 "2: "
+set $workspace2 "2: "
 set $workspace6 "6: "
 set $workspace7 "7: "
 

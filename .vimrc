@@ -17,6 +17,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'mhartington/oceanic-next'
 Plugin 'vim-airline/vim-airline'
 Plugin 'elixir-editors/vim-elixir'
+Plugin 'pangloss/vim-javascript'
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

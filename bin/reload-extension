@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# move to chrome workspace
 xdotool key 'Super_L+3'
 xdotool key "ctrl+2"
 xdotool mousemove 1071 501; xdotool click 1

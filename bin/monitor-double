@@ -1,0 +1,3 @@
+#!/bin/bash
+
+xrandr --output DP-1 --primary --auto --output LVDS-1 --below DP-1 --auto

@@ -2,7 +2,7 @@
 
 xdotool key 'Super_L+3'
 xdotool key "ctrl+2"
-xdotool mousemove 1071 501; xdotool click 1
+xdotool mousemove 658 497; xdotool click 1
 xdotool key 'ctrl+1'
 xdotool key 'ctrl+F5'
 xdotool key 'Super_L+6'

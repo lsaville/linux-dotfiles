@@ -5,22 +5,8 @@ filetype off                  " required
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+" Plugins have been moved into ~/.vim/pack/foo/start/* to utilize vim8 packages
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-call vundle#begin()
-" " let Vundle manage Vundle, required
-" "
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'scrooloose/nerdtree'
-Plugin 'mhartington/oceanic-next'
-Plugin 'vim-airline/vim-airline'
-Plugin 'elixir-editors/vim-elixir'
-Plugin 'pangloss/vim-javascript'
-" " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS

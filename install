@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# This script assumes that you've set up ssh with github
+
+printf "==============================================\n"
+printf "Linking dotfiles to home\n"
+printf "==============================================\n"
+printf "\n"
+
+for file in $(find $(pwd) -maxdepth 1 -type f -name '.*'); do
+	ln -vsf $file $HOME
+done
+
+printf "\n\n"
+
+printf "==============================================\n"
+printf "Linking binfiles to /usr/local/bin\n"
+printf "==============================================\n"
+printf "\n"
+
+for file in $(find $(pwd)/bin -type f -not -name 'deploy*'); do
+	sudo ln -vsf $file /usr/local/bin/
+done
+
+printf "\n\n"
+
+printf "==============================================\n"
+printf "Installing vim plugins\n"
+printf "==============================================\n"
+printf "\n"
+
+if [ -d "$HOME/.vim" ]; then
+  printf "Seems like there's already a .vim folder...\n"
+else
+  PACK_DIR=$HOME/.vim/pack/foo/start/
+  PLUGINS=(
+    "christoomey/vim-tmux-navigator"
+    "scrooloose/nerdtree"
+    "mhartington/oceanic-next"
+    "vim-airline/vim-airline"
+    "elixir-editors/vim-elixir"
+    "pangloss/vim-javascript"
+    "kien/ctrlp.vim"
+  )
+
+  mkdir -p $PACK_DIR && cd $PACK_DIR
+  cd $PACK_DIR
+
+  for plugin in ${PLUGINS[*]};
+  do
+    printf "\nInstalling ---->  %s\n" $plugin
+    #git clone "http://github.com/$plugin"
+    printf "\n"
+    git clone "git@github.com:$plugin"
+  done
+fi
+
+printf "\n\n"
+printf 'Successfully Installed!'
+printf "\n\n"
+
+printf ' /888888                 /88    /88888888   /88\n'
+printf '| 88__ 88               | 88   | 88_____/  | 88\n'
+printf '| 88  \ 88  /888888 | 888888888| 88     /88| 88  /888888   /88888\n'
+printf '| 88  | 88 /88__  88|__  88___/| 888888|__/| 88 /88__  88 /88___/\n'
+printf '| 88  | 88| 88  \ 88   | 88    | 88___/ /88| 88| 88888888| 88\n'
+printf '| 88  | 88| 88  | 88   | 88    | 88    | 88| 88| 88_____/ \ 8888\n'
+printf '| 88888888|  8888888   | 88    | 88    | 88| 88|  8888888  \_  88\n'
+printf '|________/ \_______/   |__/    |__/    |__/|__/ \_______/    | 888\n'
+printf ' /888888888888888888888888888888888888888888888888888888888888888\n'
+printf '| 88888888888888888888888888888888888888888888888888888888888888\n'
+printf '|_____________________________________________________________ /\n'

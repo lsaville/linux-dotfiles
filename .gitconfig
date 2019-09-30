@@ -1,11 +1,11 @@
 [user]
-	email = lee.saville@americanfinancing.net
+	email = lee.saville@taxjar.net
 	name = Lee Saville
 [push]
 	default = simple
 [core]
 	editor = vim
-  excludesfile = /home/lee/.gitignore_global
+  excludesfile = /home/gumption/.gitignore_global
 	autocrlf = input
 [alias]
   co = checkout

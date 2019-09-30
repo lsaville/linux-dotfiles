@@ -15,7 +15,8 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 # force history to read/write on every command
-export PROMPT_COMMAND="history -a; history -n"
+#export PROMPT_COMMAND="history -a; history -n"
+export PROMPT_COMMAND='history -a; history -n; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
@@ -334,8 +335,12 @@ export PATH=$PATH:/usr/local/go/bin
 #export NODEJS_HOME=/usr/local/lib/nodejs/node-v11.6.0-linux-x64/bin
 #export PATH=$NODEJS_HOME:$PATH
 
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
-source ~/.meow
+#source ~/.meow
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash

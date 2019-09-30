@@ -38,7 +38,11 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # lock the screen
+# weird things happen with this line... hangs in bg and then tries to fire on sleep?
+#bindsym $mod+x exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+#bindsym $mod+x exec i3lock --color=FF8165
 bindsym $mod+x exec /home/$USER/.config/i3/lock
+
 
 # stop and start notifications
 bindsym $mod+c exec "notify-send 'DUNST_COMMAND_PAUSE'"
@@ -53,8 +57,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -1%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # Media player controls
-bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play
-bindsym XF86AudioStop exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+#bindsym XF86AudioStop exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
@@ -64,13 +68,15 @@ bindsym --release $mod+z exec "scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f 
 
 # start rofi (a program launcher)
 
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec dmenu_run
 #bindsym $mod+d exec rofi -show run -lines 3 -eh 1 -padding 300 -width 100 -fullscreen -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18" -kb-accept-entry "Return" -kb-row-up "Control+k" -kb-row-down "Control+j"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+exec --no-startup-id nm-applet
+
 
 # change focus
 bindsym $mod+h focus left
@@ -244,4 +250,4 @@ exec compton -f
 exec unclutter --timeout 1 --fork
 
 #set background image
-exec_always --no-startup-id feh --bg-scale ~/.cache/wallpaper/ravn.jpg
+#exec_always --no-startup-id feh --bg-scale ~/.cache/wallpaper/ravn.jpg

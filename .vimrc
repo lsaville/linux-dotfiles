@@ -113,6 +113,9 @@ else
   nnoremap <esc>d :bp<CR>
 endif
 
+nnoremap <leader>q :bd<CR>
+nnoremap <leader>wq :w\|bd<CR>
+
 " experimental learnvimscriptthehardway mappings
 " capitalize word in normal mode
 nnoremap <c-u>  viwU

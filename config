@@ -15,7 +15,7 @@ set $mod Mod4
 # is used in the bar {} block below.
 
 # This font lives in ~/.fonts along with font-awesome
-font pango:System San Francisco Display 20
+font pango:System San Francisco Display 13
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -241,7 +241,7 @@ hide_edge_borders both
 #         }
 # }
 bar {
-    font pango:PowerlineSymbols, FontAwesome 16
+    font pango:PowerlineSymbols, FontAwesome 13
     position top
     status_command /usr/local/bin/i3status-rs .config/i3/status.toml
     colors {

@@ -89,6 +89,8 @@ let g:airline_theme='oceanicnext'
 " Run spec in tmux pane 1
 :nnoremap <F5> :exe ":silent ! tmux send-keys -t 1 'be rspec %' Enter" \| redraw!<CR>
 
+:vnoremap <F6> :Twrite 1<CR>
+
 " set emacs style command line shortcuts
 :cnoremap <C-A> <Home>
 :cnoremap <C-F> <Right>

@@ -1,13 +1,13 @@
 set nocompatible              " be iMproved, required
-filetype plugin on
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+filetype off
+"filetype plugin on
+"let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Plugins have been moved into ~/.vim/pack/foo/start/* to utilize vim8 packages
-set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
@@ -49,7 +49,6 @@ set listchars=tab:»·,trail:·,space:.,eol:¬
 
 "With long filenames make the ENTER to continue business less likely
 set cmdheight=3
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -130,13 +129,27 @@ vnoremap <leader>cu :s/\(\s*\){\/\*\(.*\)\*\/}/\1\2<CR>
 " sort
 vnoremap <leader>s :sor<CR>
 
+vnoremap <leader>0 :Twrite 0<CR>
+vnoremap <leader>1 :Twrite 1<CR>
+vnoremap <leader>2 :Twrite 2<CR>
+vnoremap <leader>3 :Twrite 3<CR>
+vnoremap <leader>4 :Twrite 4<CR>
+vnoremap <leader>5 :Twrite 5<CR>
+vnoremap <leader>6 :Twrite 6<CR>
+
 " from vimcasts
 nnoremap <leader>l :set list!<CR>
 
 " From youtube video... primitive snippet
 " https://youtu.be/XA2WjJbmmoM
 " https://github.com/changemewtf/dotfiles/blob/master/vim/.vimrc
-nnoremap <leader>msg :-1read $HOME/.vim/final-commit-msg.txt<CR>C
+nnoremap <leader>m1 :-1read $HOME/.vim/final-commit-msg.txt<CR>C
+nnoremap <leader>m2 :-1read $HOME/.vim/tj-pr.txt<CR>}}O
+
+" Get persisted bit from pry session
+nnoremap <leader>p :.! cat /tmp/pry-output.json \| jq .<CR>
+
+"nnoremap <leader>f :exe ":silent ! echo % \| tr -d '\n' \| xclip -sel clip \| redraw!"<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTREE
@@ -153,16 +166,50 @@ let NERDTreeShowHidden=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+"if executable('ag')
+"  " Use ag over grep
+"  set grepprg=ag\ --nogroup\ --nocolor
+"
+"  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"
+"  " ag is fast enough that CtrlP doesn't need to cache
+"  let g:ctrlp_use_caching = 0
+"endif
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FZF
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
+"Let vim know from whence springs fzf
+set rtp+=~/.fzf
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'up': '~20%' }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+nnoremap <C-p> :FZF<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,3 +219,31 @@ endif
 "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 "nnoremap \ :Ag<SPACE>
+function! GitUntrackedChanges()
+  let flist = systemlist("git status --porcelain | sed 's/M //g'")
+  let list = []
+  for f in flist
+    " git blame is the easiest comamnd I found that actually gives back line
+    " numbers.
+    let command = "git blame " . f . " -nf
+          \ | grep 'Not Committed Yet'
+          \ | sed 's/^[0..9,a..z]* //g'
+          \ | sed 's/(.*//g' "
+    let blamed_lines = system(command)
+    let split = split(blamed_lines)
+    if len(split) != 0
+      let dic = { "filename": split[0], "lnum": split[1] }
+    else
+      " If the only change is a deletion, git blame won't pick it up, so
+      " instead we just have to put the file name in, this isn't ideal.
+      let filename = trim(f)
+      let dic = { "filename": filename}
+    endif
+    call add(list, dic)
+  endfor
+  " This sets the quickfix list, with 'list' being a list of dictionaries that
+  " have filename, line number, model etc.
+  call setqflist(list)
+  copen
+endfunction
+nnoremap <Leader>gc :silent call GitUntrackedChanges()<Cr>

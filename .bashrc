@@ -298,6 +298,7 @@ man() {
 		man "$@"
 }
 
+alias awsume=". awsume"
 # shortcuts for git
 alias ga="git add"
 alias gb="git branch"
@@ -310,6 +311,7 @@ alias nuke="bundle exec rake db:drop db:create db:migrate db:seed db:test:prepar
 alias be="bundle exec"
 alias reload='source ~/.bashrc'
 alias o="cs git/optimizely_server/public/optimizely"
+alias fd="rg"
 
 #combo functions from Sal Espinosas bash profile
 function cs () {
@@ -331,6 +333,8 @@ export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+# This is a quick fix for awsume... should probably link this elsewhere
+export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 #export NODEJS_HOME=/usr/local/lib/nodejs/node-v11.6.0-linux-x64/bin
 #export PATH=$NODEJS_HOME:$PATH
@@ -344,6 +348,14 @@ export PATH=$PATH:/usr/local/go/bin
 . $HOME/.asdf/asdf.sh
 
 . $HOME/.asdf/completions/asdf.bash
+
+# --files: List files that would be searched but do not search
+# --no-ignore: Do not respect .gitignore, etc...
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 # This wrecks my current prompt... powerline is experimental for i3status-rust
 #powerline-daemon -q

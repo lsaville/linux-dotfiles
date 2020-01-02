@@ -83,22 +83,22 @@ let g:airline_theme='oceanicnext'
 " MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-:noremap <F3> :nohl<CR>
-:noremap <F4> :set relativenumber!<CR>
+noremap <F3> :nohlsearch<CR>
+noremap <F4> :set relativenumber!<CR>
 
 " Change px to rems
-:nnoremap <F1> :.! awk 'BEGIN { FPAT = "([[:space:]]*[[:alnum:][:punct:][:digit:]]+)"; } { print $1 " " $2/16.0 "rem;" }'<CR>
+nnoremap <F1> :.! awk 'BEGIN { FPAT = "([[:space:]]*[[:alnum:][:punct:][:digit:]]+)"; } { print $1 " " $2/16.0 "rem;" }'<CR>
 
 " Run spec in tmux pane 1
-:nnoremap <F5> :exe ":silent ! tmux send-keys -t 1 'be rspec %' Enter" \| redraw!<CR>
+nnoremap <F5> :execute ":silent ! tmux send-keys -t 1 'be rspec %' Enter" \| redraw!<CR>
 
-:vnoremap <F6> :Twrite 1<CR>
+vnoremap <F6> :Twrite 1<CR>
 
 " set emacs style command line shortcuts
-:cnoremap <C-A> <Home>
-:cnoremap <C-F> <Right>
-:cnoremap <C-B> <Left>
-:cnoremap <C-E> <End>
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+cnoremap <C-E> <End>
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>

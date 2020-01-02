@@ -105,6 +105,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias meow='mpg123 -q ~/git/linux-dotfiles/jaguar2.mp3'
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

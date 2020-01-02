@@ -110,10 +110,10 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " The strange chars for Darwin are the output for alt+f and alt+d
 " The strange chars for linux are the output for alt+f and alt+d
 " In the linux env alt+seemingly-anything == <esc>
-if s:uname == "Darwin"
+if s:uname == "Darwin" " osx
   nnoremap ƒ :bn<CR>
   nnoremap ∂ :bp<CR>
-else
+else " linux
   nnoremap <esc>f :bn<CR>
   nnoremap <esc>d :bp<CR>
 endif

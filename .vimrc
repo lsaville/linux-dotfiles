@@ -124,6 +124,11 @@ nnoremap <leader>wq :w\|bd<CR>
 " experimental learnvimscriptthehardway mappings
 " capitalize word in normal mode
 nnoremap <c-u>  viwU
+nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" Kill html tags. Makes it easy to manually scrape web-content
+nnoremap <leader>kh :%s/<\([^<]*\)>//g<CR>
 
 " comment jsx
 vnoremap <leader>cc :s/\(\s*\)\(.*\)/\1{\/*\2*\/}/ \| :nohl<CR>

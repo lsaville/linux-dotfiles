@@ -1,0 +1,1 @@
+rg -l 'binding.pry' | xargs sed -i '/binding.pry/d'

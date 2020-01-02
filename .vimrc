@@ -20,6 +20,7 @@ let s:uname = substitute(system("uname -s"), '\n', '', '')
 
 " Makes leader a space
 let mapleader = " "
+let maplocalleader = "\\"
 
 set number
 set cursorcolumn

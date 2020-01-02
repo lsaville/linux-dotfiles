@@ -136,7 +136,7 @@ vnoremap <leader>cc :s/\(\s*\)\(.*\)/\1{\/*\2*\/}/ \| :nohl<CR>
 vnoremap <leader>cu :s/\(\s*\){\/\*\(.*\)\*\/}/\1\2<CR>
 
 " sort
-vnoremap <leader>s :sor<CR>
+vnoremap <leader>s :sort<CR>
 
 vnoremap <leader>0 :Twrite 0<CR>
 vnoremap <leader>1 :Twrite 1<CR>

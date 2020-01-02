@@ -361,6 +361,8 @@ export PATH=$PATH:/usr/local/go/bin
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
+export DISABLE_SPRING=1
+
 # This wrecks my current prompt... powerline is experimental for i3status-rust
 #powerline-daemon -q
 #POWERLINE_BASH_CONTINUATION=1

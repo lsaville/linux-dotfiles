@@ -260,7 +260,7 @@ exec --no-startup-id i3-msg "workspace $workspace1; exec firefox"
 exec slack
 exec --no-startup-id i3-msg "workspace $workspace6; exec alacritty"
 exec spotify
-exec compton -f
+exec --no-startup-id "allow_rgb10_configs=false picom --config ~/.config/picom/picom.conf -b"
 exec unclutter --timeout 1 --fork
 
 #set background image

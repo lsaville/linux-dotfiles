@@ -152,13 +152,25 @@ nnoremap <leader>l :set list!<CR>
 " From youtube video... primitive snippet
 " https://youtu.be/XA2WjJbmmoM
 " https://github.com/changemewtf/dotfiles/blob/master/vim/.vimrc
+" -1 gets rid of having a blank line at top
 nnoremap <leader>m1 :-1read $HOME/.vim/final-commit-msg.txt<CR>C
-nnoremap <leader>m2 :-1read $HOME/.vim/tj-pr.txt<CR>}}O
+nnoremap <leader>m2 :-1read $HOME/.vim/tj-pr.txt<CR>o
 
 " Get persisted bit from pry session
+" nnoremap <leader>p :.! ruby -e "require 'json'; pp JSON.parse(File.read('/tmp/pry-output.json'))"<CR>
+
 nnoremap <leader>p :.! cat /tmp/pry-output.json \| jq .<CR>
 
-"nnoremap <leader>f :exe ":silent ! echo % \| tr -d '\n' \| xclip -sel clip \| redraw!"<CR>
+" Get current filename to system clipboard
+function! GimmeFilename()
+  execute system('echo -n ' . expand('%') . ' | xclip -sel clip')
+endfunction
+"nnoremap <leader>f :silent call GimmeFilename()<CR>
+nnoremap <leader>f :let @+=expand('%')<CR>
+
+" attemp to use jk as ctrl-c
+inoremap jk 
+inoremap  <nop>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTREE
@@ -169,22 +181,6 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 
 "show hidden files in nerdtree
 let NERDTreeShowHidden=1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AG
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" The Silver Searcher
-"if executable('ag')
-"  " Use ag over grep
-"  set grepprg=ag\ --nogroup\ --nocolor
-"
-"  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"
-"  " ag is fast enough that CtrlP doesn't need to cache
-"  let g:ctrlp_use_caching = 0
-"endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FZF
@@ -220,14 +216,27 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 nnoremap <C-p> :FZF<CR>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXPERIMENTAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" bind \ (backward slash) to grep shortcut
-"command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+augroup filetype_ruby
+  autocmd!
+  autocmd filetype ruby :iabbrev <buffer> def defend<up>
+augroup end
 
-"nnoremap \ :Ag<SPACE>
+" Vimscript file settings ------------------------------- {{{
+augroup filetype_vim
+  autocmd!
+  autocmd filetype vim setlocal foldmethod=marker
+augroup end
+" }}}
+
+augroup filetype_html
+  autocmd!
+  autocmd filetype html nnoremap <buffer> <localleader>f Vatzf
+augroup end
+
+" From Zach Thomas
 function! GitUntrackedChanges()
   let flist = systemlist("git status --porcelain | sed 's/M //g'")
   let list = []

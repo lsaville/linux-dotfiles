@@ -1,5 +1,8 @@
 set nocompatible              " be iMproved, required
 filetype off
+
+" Vimwiki... bad things start to happen with filetype plugin on and html.erb
+" files. This is an outstanding mystery
 "filetype plugin on
 "let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 

@@ -40,7 +40,7 @@ else
     "vim-airline/vim-airline"
     "elixir-editors/vim-elixir"
     "pangloss/vim-javascript"
-    "kien/ctrlp.vim"
+    "fzf.vim"
   )
 
   mkdir -p $PACK_DIR && cd $PACK_DIR

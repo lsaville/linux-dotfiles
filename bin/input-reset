@@ -1,0 +1,4 @@
+xinput set-prop 'DELL08AF:00 06CB:76AF Touchpad' 297 1
+xinput set-prop 'DELL08AF:00 06CB:76AF Touchpad' 277 1
+
+xinput set-prop 'Clearly Superior Technologies. CST Laser Trackball' 277 1

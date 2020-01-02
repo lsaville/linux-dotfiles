@@ -315,7 +315,7 @@ alias nuke="bundle exec rake db:drop db:create db:migrate db:seed db:test:prepar
 alias be="bundle exec"
 alias reload='source ~/.bashrc'
 alias o="cs git/optimizely_server/public/optimizely"
-alias fd="rg"
+alias fd="rg --hidden --ignore-case"
 
 #combo functions from Sal Espinosas bash profile
 function cs () {

@@ -122,7 +122,8 @@ nnoremap <leader>wq :w\|bd<CR>
 
 " experimental learnvimscriptthehardway mappings
 " capitalize word in normal mode
-nnoremap <c-u>  viwU
+inoremap <c-u>  viwUEi
+nnoremap <c-u>  viwUE
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 

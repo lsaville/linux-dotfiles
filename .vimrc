@@ -36,7 +36,6 @@ set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set autoindent
 set mouse=a
 
-set pastetoggle=<F2>
 set showcmd
 set showmode
 set hlsearch

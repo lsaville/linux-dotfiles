@@ -123,7 +123,7 @@ nnoremap <leader>wq :w\|bd<CR>
 " experimental learnvimscriptthehardway mappings
 " capitalize word in normal mode
 inoremap <c-u>  viwUEi
-nnoremap <c-u>  viwUE
+nnoremap <c-u>  viwUe
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
@@ -148,6 +148,13 @@ vnoremap <leader>6 :Twrite 6<CR>
 
 " from vimcasts
 nnoremap <leader>l :set list!<CR>
+
+" from https://vim.fandom.com/wiki/Move_to_next/previous_line_with_same_indentation
+nnoremap <esc>b :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
+nnoremap <esc>e :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
+vnoremap <esc>b :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
+vnoremap <esc>e :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
+
 
 " From youtube video... primitive snippet
 " https://youtu.be/XA2WjJbmmoM

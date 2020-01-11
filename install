@@ -40,7 +40,10 @@ else
     "vim-airline/vim-airline"
     "elixir-editors/vim-elixir"
     "pangloss/vim-javascript"
-    "fzf.vim"
+    "junegunn/fzf.vim"
+    "junegunn/vim-easy-align"
+    "tpope/vim-tbone"
+    "tpope/vim-scriptease"
   )
 
   mkdir -p $PACK_DIR && cd $PACK_DIR

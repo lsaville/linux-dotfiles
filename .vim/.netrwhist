@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/lee/git'
-let g:netrw_dirhist_2='/home/lee'
-let g:netrw_dirhist_3='/home/lee/git'
-let g:netrw_dirhist_4='/home/lee/git/americanfinancing.net'
-let g:netrw_dirhist_5='/home/lee/git/americanfinancing.net/bin'
-let g:netrw_dirhist_6='/home/lee/git/americanfinancing.net'
-let g:netrw_dirhist_7='/home/lee/git/americanfinancing.net/app/views/pages'

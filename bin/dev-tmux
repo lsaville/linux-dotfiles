@@ -8,19 +8,36 @@ SESSION=$USER
 # Create main three pane session large on left, horizontal split
 # slightly asymmetrically on the left
 
-tmux -2 new-session -d -s $SESSION -n 'Main'
-tmux split-window -h
-tmux split-window -v -p 45
+# tmux -2 new-session -d -s $SESSION -n 'Main'
+# tmux split-window -h
+# tmux split-window -v -p 45
+
+tmux -2 new-session -c ~/git/taxjar/ -d -s $SESSION -n 'TJ-foyer'
 
 # Create second window and fire server script
 
-tmux new-window -t $SESSION:1 -n 'Server'
-tmux send-keys 'bin/rs' C-m
+tmux new-window -c ~/git/taxjar/engine-admin-ui -t $SESSION:2 -n 'EAC'
+tmux split-window -h -c '#{pane_current_path}'
+tmux split-window -v -p 45 -c '#{pane_current_path}'
+
+tmux new-window -c ~/git/taxjar/ex_smartcalcs -t $SESSION:3 -n 'ExSmartcalcs'
+tmux split-window -h -c '#{pane_current_path}'
+tmux split-window -v -p 45 -c '#{pane_current_path}'
+
+tmux new-window -c ~/git/taxjar/calcs-data-scripts -t $SESSION:4 -n 'CalcsDataScripts'
+tmux split-window -h -c '#{pane_current_path}'
+tmux split-window -v -p 45 -c '#{pane_current_path}'
+
+tmux new-window -c ~/git/taxjar/tax_rules -t $SESSION:5 -n 'TaxRules'
+tmux split-window -h -c '#{pane_current_path}'
+tmux split-window -v -p 45 -c '#{pane_current_path}'
+
+tmux new-window -c ~/git/taxjar/taxjar -t $SESSION:6 -n 'TaxJar'
+tmux split-window -h -c '#{pane_current_path}'
+tmux split-window -v -p 45 -c '#{pane_current_path}'
 
 # Select the main window
-
-tmux select-window -t 'Main'
+tmux select-window -t 'TJ-foyer'
 
 # Attach session
-
 tmux -2 attach-session -t $SESSION

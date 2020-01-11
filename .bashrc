@@ -15,11 +15,12 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 # force history to read/write on every command
-export PROMPT_COMMAND="history -a; history -n"
+#export PROMPT_COMMAND="history -a; history -n"
+export PROMPT_COMMAND='history -a; history -n; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=10000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -104,6 +105,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias meow='mpg123 -q ~/git/linux-dotfiles/jaguar2.mp3'
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -130,7 +133,9 @@ if ! shopt -oq posix; then
 fi
 
 # Don't clear the screen after quitting a man page
-export MANPAGER="less -X";
+export MANPAGER="less";
+export PAGER="less";
+export LESS="-iMSx4 -RFX"
 
 # set vim as default editor
 export VISUAL=vim
@@ -297,6 +302,7 @@ man() {
 		man "$@"
 }
 
+alias awsume=". awsume"
 # shortcuts for git
 alias ga="git add"
 alias gb="git branch"
@@ -309,6 +315,7 @@ alias nuke="bundle exec rake db:drop db:create db:migrate db:seed db:test:prepar
 alias be="bundle exec"
 alias reload='source ~/.bashrc'
 alias o="cs git/optimizely_server/public/optimizely"
+alias fd="rg --hidden --ignore-case"
 
 #combo functions from Sal Espinosas bash profile
 function cs () {
@@ -330,12 +337,35 @@ export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+# This is a quick fix for awsume... should probably link this elsewhere
+export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 #export NODEJS_HOME=/usr/local/lib/nodejs/node-v11.6.0-linux-x64/bin
 #export PATH=$NODEJS_HOME:$PATH
 
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
-source ~/.meow
+#source ~/.meow
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
+
+# --files: List files that would be searched but do not search
+# --no-ignore: Do not respect .gitignore, etc...
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+export DISABLE_SPRING=1
+
+# This wrecks my current prompt... powerline is experimental for i3status-rust
+#powerline-daemon -q
+#POWERLINE_BASH_CONTINUATION=1
+#POWERLINE_BASH_SELECT=1
+#. /usr/share/powerline/bindings/bash/powerline.sh
+source ~/git-completion.bash

@@ -333,6 +333,19 @@ function da () {
   gd "$@" && ga "$@"
 }
 
+#a la Robbie Smith
+gcb() {
+  local tags branches target
+  branches=$(
+  git branch --color | grep -v HEAD             |
+  sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+  sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+  target=$(
+  ( echo "$branches") |
+  fzf-tmux -l40 -- --no-hscroll --ansi +m -d "\t" -n 2 -1 -q "$*") || return
+  git checkout $(echo "$target" | awk '{print $2}')
+}
+
 #PATH=/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/.rbenv/bin:/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/bin:/home/lee/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/lee/.phantomjs/phantomjs/bin
 export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 

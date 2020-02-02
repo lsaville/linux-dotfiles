@@ -379,9 +379,30 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 
 export DISABLE_SPRING=1
 
+function read_only_prod() {
+  awsume_profile eac-prod
+  kubectl_context production
+  hatch -n readonly -a taxjar run rails c
+}
+
+function staging_console() {
+  awsume_profile eac-staging
+  kubectl_context staging
+  hatch -n taxjar -a taxjar-ui run rails c
+}
+
+function kubectl_context() {
+  kubectl config use-context $1
+}
+
+function awsume_profile() {
+  awsume $1
+}
+
 # This wrecks my current prompt... powerline is experimental for i3status-rust
 #powerline-daemon -q
 #POWERLINE_BASH_CONTINUATION=1
 #POWERLINE_BASH_SELECT=1
 #. /usr/share/powerline/bindings/bash/powerline.sh
 source ~/git-completion.bash
+source <(kubectl completion bash)

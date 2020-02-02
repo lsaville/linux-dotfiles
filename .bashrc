@@ -275,8 +275,10 @@ set_prompts() {
         hostStyle="\[$yellow\]"
     fi
 
+    dashed_line=$(printf "%*s" $(($(tput cols))) "" | sed "s/ /-/g")
     # set the terminal title to the current working directory
-    PS1="\[\033]0;\w\007\]"
+    PS1="$dashed_line"
+    PS1+="\[\033]0;\w\007\]"
 
     PS1+="\n" # newline
     PS1+="\[$blue\]\w" # working directory

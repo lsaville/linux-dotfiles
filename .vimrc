@@ -53,6 +53,12 @@ set listchars=tab:»·,trail:·,space:.,eol:¬
 "With long filenames make the ENTER to continue business less likely
 set cmdheight=3
 
+" Prevent screen clear on vim exit (bg too)
+" https://github.com/garybernhardt/dotfiles/blob/7e0f353bca25b07d2ef9bcae2070406e3d4ac029/.vimrc#L57
+" http://www.shallowsky.com/linux/noaltscreen.html
+" This is now handled on a system level by a line in .Xresources
+" set t_ti= t_te=
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

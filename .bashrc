@@ -355,6 +355,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # This is a quick fix for awsume... should probably link this elsewhere
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin/
 #export NODEJS_HOME=/usr/local/lib/nodejs/node-v11.6.0-linux-x64/bin
 #export PATH=$NODEJS_HOME:$PATH
 

@@ -37,6 +37,9 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# luke smith emoji thing
+bindsym $mod+u exec --no-startup-id dmenuunicode -b
+
 # lock the screen
 # weird things happen with this line... hangs in bg and then tries to fire on sleep?
 #bindsym $mod+x exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
@@ -68,7 +71,7 @@ bindsym --release $mod+z exec "scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f 
 
 # start rofi (a program launcher)
 
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -fn 'System San Francisco Display'
 #bindsym $mod+d exec rofi -show run -lines 3 -eh 1 -padding 300 -width 100 -fullscreen -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18" -kb-accept-entry "Return" -kb-row-up "Control+k" -kb-row-down "Control+j"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications

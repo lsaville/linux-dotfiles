@@ -36,6 +36,10 @@ tmux new-window -c ~/git/taxjar/taxjar -t $SESSION:6 -n 'TaxJar'
 tmux split-window -h -c '#{pane_current_path}'
 tmux split-window -v -p 45 -c '#{pane_current_path}'
 
+tmux new-window -c ~/git/taxjar/tax-rate-service -t $SESSION:7 -n 'tax-rate-service'
+tmux split-window -h -c '#{pane_current_path}'
+tmux split-window -v -p 45 -c '#{pane_current_path}'
+
 # Select the main window
 tmux select-window -t 'TJ-foyer'
 

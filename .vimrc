@@ -57,24 +57,14 @@ set cmdheight=3
 " https://github.com/garybernhardt/dotfiles/blob/7e0f353bca25b07d2ef9bcae2070406e3d4ac029/.vimrc#L57
 " http://www.shallowsky.com/linux/noaltscreen.html
 " This is now handled on a system level by a line in .Xresources
-" set t_ti= t_te=
+set t_ti= t_te=
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"Colorscheme
-colorscheme OceanicNext
-autocmd Colorscheme * highlight Normal ctermbg=None
-autocmd Colorscheme * highlight NonText ctermbg=None
-
-" Switch syntax highlighting on
-syntax on
-" oceanic settings
 syntax enable
-if (has("termguicolors"))
-  set termguicolors
-endif
+colorscheme OceanicNext
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AIRLINE
@@ -88,6 +78,11 @@ let g:airline_theme='oceanicnext'
 " MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 noremap <F3> :nohlsearch<CR>
 noremap <F4> :set relativenumber!<CR>
 
@@ -96,8 +91,6 @@ nnoremap <F1> :.! awk 'BEGIN { FPAT = "([[:space:]]*[[:alnum:][:punct:][:digit:]
 
 " Run spec in tmux pane 1
 nnoremap <F5> :execute ":silent ! tmux send-keys -t 1 'be rspec %' Enter" \| redraw!<CR>
-
-vnoremap <F6> :Twrite 1<CR>
 
 " set emacs style command line shortcuts
 cnoremap <C-A> <Home>
@@ -132,6 +125,7 @@ inoremap <c-u>  viwUEi
 nnoremap <c-u>  viwUe
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>c :.!awk -F, '{print NF}'<CR>
 
 " Kill html tags. Makes it easy to manually scrape web-content
 nnoremap <leader>kh :%s/<\([^<]*\)>//g<CR>
@@ -152,8 +146,13 @@ vnoremap <leader>4 :Twrite 4<CR>
 vnoremap <leader>5 :Twrite 5<CR>
 vnoremap <leader>6 :Twrite 6<CR>
 
+nnoremap <leader>7 vip:call DBeaver()<CR>}
+
 " from vimcasts
 nnoremap <leader>l :set list!<CR>
+
+" from https://github.com/sirupsen/dotfiles/blob/8d232bab79c0032af1b827ad523d77f0f8959037/home/.vimrc#L147
+vnoremap <leader>s :!sqlformat --reindent --keywords upper --identifiers lower -<CR>
 
 " from https://vim.fandom.com/wiki/Move_to_next/previous_line_with_same_indentation
 nnoremap <esc>b :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
@@ -180,6 +179,62 @@ function! GimmeFilename()
 endfunction
 "nnoremap <leader>f :silent call GimmeFilename()<CR>
 nnoremap <leader>f :let @+=expand('%')<CR>
+
+function! DBeaver() range
+  let selection = join(map(getline(a:firstline, a:lastline), 'substitute(v:val, "^\\s*","","")'), "\r")
+  let @+ = selection
+
+  " go to left i3 pane
+  execute system('xdotool key Super_L+h')
+  " select all text and delete
+  execute system('xdotool key ctrl+a BackSpace')
+  " paste query
+  execute system('xdotool key ctrl+v')
+  " run query in DBeaver
+  execute system('xdotool key ctrl+Return')
+  " go to back from whence it came
+  execute system('xdotool key Super_L+h')
+  "redraw!
+endfunction
+
+function! DoStuff()
+    let lineNum = line('.')
+    let fileName = resolve(expand('%:t'))
+    let fileDir = resolve(expand("%:p:h"))
+    let cdDir = "cd '" . fileDir . "'; "
+    let l:remotes = system(cdDir . "git remote")
+    let l:remote_list = split(l:remotes, '\n')
+    let remote_url = system(cdDir . "git config --get remote.origin.url")
+    " Get Directory & File Names
+    let fullPath = resolve(expand("%:p"))
+    " Git Commands
+    let gitRoot = system(cdDir . "git rev-parse --show-toplevel")
+    " Strip Newlines
+    let remote_url = StripNL(remote_url)
+    let gitRoot = StripNL(gitRoot)
+    let fullPath = StripNL(fullPath)
+    " Git Relative Path
+    let relative = split(fullPath, gitRoot)[-1]
+
+    echom "lineNum: " . lineNum
+    echom "fileName: " . fileName
+    echom "fileDir: " . fileDir
+    echom "cdDir: " . cdDir
+    echom "l:remotes: " . l:remotes
+    echom "l:remote_list: " . l:remote_list
+    echom "remote_url: " . remote_url
+    echom "fullPath: " . fullPath
+    echom "gitRoot: " . gitRoot
+    echom "remote_url: " . remote_url
+    echom "gitRoot: " . gitRoot
+    echom "fullPath: " . fullPath
+    echom "relative: " . relative
+endfunction
+
+func! StripNL(l)
+  return substitute(a:l, '\n$', '', '')
+endfun
+
 
 " attemp to use jk as ctrl-c
 inoremap jk 
@@ -232,9 +287,15 @@ nnoremap <C-p> :FZF<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXPERIMENTAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup filetype_elixir
+  autocmd!
+  autocmd filetype elixir :iabbrev <buffer> pry require IEx;IEx.pry
+augroup end
+
 augroup filetype_ruby
   autocmd!
   autocmd filetype ruby :iabbrev <buffer> def defend<up>
+  autocmd filetype ruby :iabbrev <buffer> pry binding.pry
 augroup end
 
 " Vimscript file settings ------------------------------- {{{

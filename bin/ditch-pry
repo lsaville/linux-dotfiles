@@ -1,1 +1,6 @@
+echo "====== pry ====="
 rg -l 'binding.pry' | xargs sed -i '/binding.pry/d'
+echo "== remote_pry =="
+rg -l 'binding.remote_pry' | xargs sed -i '/binding.remote_pry/d'
+echo "====== IEx ====="
+rg -l 'IEx.pry' | xargs sed -i '/IEx.pry/d'

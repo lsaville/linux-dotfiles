@@ -82,6 +82,7 @@ fi
 
 # Don't clear the screen after quitting a man page
 export MANPAGER="less";
+#export PAGER="pspg -s 4";
 export PAGER="less";
 #export LESS="-iMSx4 -RFX"
 
@@ -326,7 +327,15 @@ export PATH=$PATH:$HOME/go/bin/
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg \
+--files \
+--no-ignore \
+--hidden \
+--follow \
+--glob "!.git/*" \
+--glob "!node_modules/*" \
+--glob "!deps/*" \
+--glob "!_build/*"'
 
 export DISABLE_SPRING=1
 
@@ -357,3 +366,5 @@ function awsume_profile() {
 #. /usr/share/powerline/bindings/bash/powerline.sh
 source ~/git-completion.bash
 source <(kubectl completion bash)
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

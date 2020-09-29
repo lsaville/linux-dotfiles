@@ -270,6 +270,13 @@ alias be="bundle exec"
 alias reload='source ~/.bashrc'
 alias o="cs git/optimizely_server/public/optimizely"
 alias fd="rg --hidden --ignore-case"
+alias aep="awsume eac-prod"
+alias aes="awsume eac-staging"
+# "temp time"
+alias tt="sudo mount -o remount,size=10G,noatime /tmp"
+alias kiq="SIDEKIQ_CONCURRENCY=5 bundle exec sidekiq -C config/sidekiq.yml"
+alias rs="bundle exec rails s"
+alias rc="bundle exec rails c"
 
 #combo functions from Sal Espinosas bash profile
 function cs () {
@@ -298,11 +305,23 @@ gcb() {
   git checkout $(echo "$target" | awk '{print $2}')
 }
 
+gdb() {
+  local tags branches target
+  branches=$(
+  git branch --color | grep -v HEAD             |
+  sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+  sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+  target=$(
+  ( echo "$branches") |
+  fzf-tmux -l40 -- --no-hscroll --ansi +m -d "\t" -n 2 -1 -q "$*") || return
+  git branch -d $(echo "$target" | awk '{print $2}')
+}
+
 #PATH=/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/.rbenv/bin:/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/bin:/home/lee/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/lee/.phantomjs/phantomjs/bin
 export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$HOME/.rbenv/bin:$PATH"
+#export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 # This is a quick fix for awsume... should probably link this elsewhere
 export PATH="$HOME/.local/bin:$PATH"
@@ -337,18 +356,54 @@ export FZF_DEFAULT_COMMAND='rg \
 --glob "!deps/*" \
 --glob "!_build/*"'
 
+# from zk trial -> https://github.com/sirupsen/zk
+
+#export FZF_DEFAULT_OPTS="--height=40% --multi --tiebreak=begin \
+#  --bind 'ctrl-y:execute-silent(echo {} | xclip -sel clip)' \
+#  --bind 'alt-down:preview-down,alt-up:preview-up' \
+#  --bind \"ctrl-v:execute-silent[ \
+#    tmux send-keys -t \{left\} Escape :vs Space && \
+#    tmux send-keys -t \{left\} -l {} && \
+#    tmux send-keys -t \{left\} Enter \
+#  ]\"
+#  --bind \"ctrl-x:execute-silent[ \
+#    tmux send-keys -t \{left\} Escape :sp Space && \
+#    tmux send-keys -t \{left\} -l {} && \
+#    tmux send-keys -t \{left\} Enter \
+#  ]\"
+#  --bind \"ctrl-o:execute-silent[ \
+#    tmux send-keys -t \{left\} Escape :read Space ! Space echo Space && \
+#    tmux send-keys -t \{left\} -l \\\"{}\\\" && \
+#    tmux send-keys -t \{left\} Enter \
+#  ]\""
+
+export PATH=$PATH:$HOME/git/zk/bin
+export ZK_PATH="$HOME/Dropbox/Zettelkasten"
+
 export DISABLE_SPRING=1
 
-function read_only_prod() {
+function taxjar_prod() {
   awsume_profile eac-prod
   kubectl_context production
   hatch -n readonly -a taxjar run rails c
 }
 
-function staging_console() {
+function taxjar_staging() {
   awsume_profile eac-staging
   kubectl_context staging
   hatch -n taxjar -a taxjar-ui run rails c
+}
+
+#function eac_prod() {
+#  awsume_profile eac-prod
+#  kubectl_context production
+#  hatch run -n eac -a engine-admin-ui rails console
+#}
+
+function eac_staging() {
+  awsume_profile eac-staging
+  kubectl_context staging
+  hatch run -n eac -a engine-admin-ui
 }
 
 function kubectl_context() {
@@ -367,4 +422,10 @@ function awsume_profile() {
 source ~/git-completion.bash
 source <(kubectl completion bash)
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# fzf-menu was throwing ls errors... these don't exist
+#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/usr/local/lib:$PATH/"
+export LD_LIBRARY_PATH=/usr/local/lib
+
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+

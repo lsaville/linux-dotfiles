@@ -90,7 +90,7 @@ noremap <F4> :set relativenumber!<CR>
 nnoremap <F1> :.! awk 'BEGIN { FPAT = "([[:space:]]*[[:alnum:][:punct:][:digit:]]+)"; } { print $1 " " $2/16.0 "rem;" }'<CR>
 
 " Run spec in tmux pane 1
-nnoremap <F5> :execute ":silent ! tmux send-keys -t 1 'be rspec %' Enter" \| redraw!<CR>
+nnoremap <F5> :execute ":silent ! tmux send-keys -t 1 Enter \| tmux send-keys -t 1 'be rspec %' Enter" \| redraw!<CR>
 
 " set emacs style command line shortcuts
 cnoremap <C-A> <Home>
@@ -116,6 +116,8 @@ else " linux
   nnoremap <esc>d :bp<CR>
 endif
 
+nnoremap <esc>p :Buffers<CR>
+
 nnoremap <leader>q :bd<CR>
 nnoremap <leader>wq :w\|bd<CR>
 
@@ -124,6 +126,7 @@ nnoremap <leader>wq :w\|bd<CR>
 inoremap <c-u>  viwUEi
 nnoremap <c-u>  viwUe
 nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>eb :e ~/.bashrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>c :.!awk -F, '{print NF}'<CR>
 
@@ -179,6 +182,9 @@ function! GimmeFilename()
 endfunction
 "nnoremap <leader>f :silent call GimmeFilename()<CR>
 nnoremap <leader>f :let @+=expand('%')<CR>
+
+" file name with line
+nnoremap <leader>gl :let @+=expand('%') . ":" . line('.')<CR>
 
 function! DBeaver() range
   let selection = join(map(getline(a:firstline, a:lastline), 'substitute(v:val, "^\\s*","","")'), "\r")
@@ -339,3 +345,63 @@ function! GitUntrackedChanges()
   copen
 endfunction
 nnoremap <Leader>gc :silent call GitUntrackedChanges()<Cr>
+
+function FindOrCreateScratchFile()
+  let l:scratch_file_name = StripNL(system("branch-scratch-name"))
+  execute "e ".fnameescape("../scratch/" . l:scratch_file_name)
+endfunction
+
+
+" zk trial -> https://github.com/sirupsen/dotfiles/blob/master/home/.vimrc#L480-L517
+
+function! SNote(...)
+  let path = strftime("%Y%m%d%H%M")."-".trim(join(a:000)).".md"
+  execute ":sp " . fnameescape(path)
+endfunction
+command! -nargs=* SNote call SNote(<f-args>)
+
+function! Note(...)
+  let path = strftime("%Y%m%d%H%M")."-".trim(join(a:000)).".md"
+  execute ":e " . fnameescape(path)
+endfunction
+command! -nargs=* Note call Note(<f-args>)
+
+function! ZettelkastenSetup()
+  if expand("%:t") !~ '^[0-9]\+'
+    return
+  endif
+  " syn region mkdFootnotes matchgroup=mkdDelimiter start="\[\["    end="\]\]"
+
+  inoremap <expr> <plug>(fzf-complete-path-custom) fzf#vim#complete#path("rg --files -t md \| sed 's/^/[[/g' \| sed 's/$/]]/'")
+  imap <buffer> [[ <plug>(fzf-complete-path-custom)
+
+  function! s:CompleteTagsReducer(lines)
+    if len(a:lines) == 1
+      return "#" . a:lines[0]
+    else
+      return split(a:lines[1], '\t ')[1]
+    end
+  endfunction
+
+  inoremap <expr> <plug>(fzf-complete-tags) fzf#vim#complete(fzf#wrap({
+        \ 'source': 'zkt-raw',
+        \ 'options': '--multi --ansi --nth 2 --print-query --exact --header "Enter without a selection creates new tag"',
+        \ 'reducer': function('<sid>CompleteTagsReducer')
+        \ }))
+  imap <buffer> # <plug>(fzf-complete-tags)
+endfunction
+
+" Don't know why I can't get FZF to return {2}
+function! InsertSecondColumn(line)
+  " execute 'read !echo ' .. split(a:e[0], '\t')[1]
+  exe 'normal! o' .. split(a:line, '\t')[1]
+endfunction
+
+command! ZKR call fzf#run(fzf#wrap({
+        \ 'source': 'ruby ~/.bin/zk-related.rb "' .. bufname("%") .. '"',
+        \ 'options': '--ansi --exact --nth 2',
+        \ 'sink':    function("InsertSecondColumn")
+      \}))
+
+autocmd BufNew,BufNewFile,BufRead ~/Documents/Zettelkasten/*.md call ZettelkastenSetup()
+

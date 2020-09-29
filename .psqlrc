@@ -1,3 +1,15 @@
+\set QUIET
+\pset null '[NULL]'
 \pset linestyle unicode
 \pset border 2
-\setenv PAGER 'pspg -s 18 -X'
+\setenv PAGER 'pspg -s 18 -X --no-mouse'
+
+\set PROMPT1 '%n@%m:%>/%/%x%#\n%`printf "%*s" $(tput cols) "" | sed "s/ /-/g"`\n'
+\set PROMPT2 ''
+--\timing
+\x off
+\set VERBOSITY verbose
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+--SET default_transaction_read_only = true;
+\unset QUIET

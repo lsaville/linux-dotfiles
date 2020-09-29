@@ -34,6 +34,21 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec alacritty
 
+# start a floating terminal w/vim projected usage: notes on the fly
+# alacritty -name notes
+# for_window [class="alacritty" instance"notes"] floating enable
+bindsym $mod+n exec ~/try
+for_window [instance="notes" class="Alacritty"] floating enable
+
+# experimental fzf dmenu replacement a la https://github.com/spikegrobstein/fzf-menu
+#bindsym $mod+i exec alacritty --class "fzf-menu" --geometry 640x480 -e ~/git/linux-dotfiles/bin/fzf-menu
+#for_window [instance="^fzf-menu$" class="Alacritty"] floating enable
+
+# the geometry doesn't work here... additionally upon chosing an executable, the picker does not go away. I have a lot of things in $PATH that are only ls'able by the sudoer, and this creates error output, I wonder if this is why the picker doesn't terminate
+
+bindsym $mod+i exec alacritty --class "fzf-menu" -e ~/git/linux-dotfiles/bin/fzf-menu
+for_window [instance="^fzf-menu$" class="Alacritty"] floating enable
+
 # kill focused window
 bindsym $mod+Shift+q kill
 

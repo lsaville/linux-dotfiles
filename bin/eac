@@ -1,0 +1,10 @@
+tmux split-window -v -c '#{pane_current_path}'
+tmux split-window -v -c '#{pane_current_path}'
+. awsume eac-prod
+bundle exec rails s
+tmux select-pane -U
+. awsume eac-prod
+SIDEKIQ_CONCURRENCY=5 bundle exec sidekiq -C config/sidekiq.yml
+tmux select-pane -U
+. awsume eac-prod
+bundle exec rails c

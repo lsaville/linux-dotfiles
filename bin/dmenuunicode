@@ -6,6 +6,7 @@
 xclip -h 2>/dev/null || exit 1
 
 chosen=$(cut -d ';' -f1 ${XDG_DATA_HOME:-$HOME/.local/share}/emoji | dmenu -fn 'System San Francisco Display' -b -i -l 20 | sed "s/ .*//")
+#chosen=$(cut -d ';' -f1 ${XDG_DATA_HOME:-$HOME/.local/share}/emoji | fzf | sed "s/ .*//")
 
 [ "$chosen" != "" ] || exit
 

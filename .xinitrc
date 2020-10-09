@@ -21,4 +21,6 @@ setxkbmap -option ctrl:nocaps
 #
 xautolock -time 5 -locker "i3lock" -detectsleep &
 
+sudo mount -o remount,size=16G,noatime /tmp
+
 exec i3

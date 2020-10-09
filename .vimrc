@@ -141,13 +141,13 @@ vnoremap <leader>cu :s/\(\s*\){\/\*\(.*\)\*\/}/\1\2<CR>
 " sort
 vnoremap <leader>s :sort<CR>
 
-vnoremap <leader>0 :Twrite 0<CR>
-vnoremap <leader>1 :Twrite 1<CR>
-vnoremap <leader>2 :Twrite 2<CR>
-vnoremap <leader>3 :Twrite 3<CR>
-vnoremap <leader>4 :Twrite 4<CR>
-vnoremap <leader>5 :Twrite 5<CR>
-vnoremap <leader>6 :Twrite 6<CR>
+vnoremap <leader>0 :Twrite 0<CR>}
+vnoremap <leader>1 :Twrite 1<CR>}
+vnoremap <leader>2 :Twrite 2<CR>}
+vnoremap <leader>3 :Twrite 3<CR>}
+vnoremap <leader>4 :Twrite 4<CR>}
+vnoremap <leader>5 :Twrite 5<CR>}
+vnoremap <leader>6 :Twrite 6<CR>}
 
 nnoremap <leader>7 vip:call DBeaver()<CR>}
 
@@ -155,7 +155,7 @@ nnoremap <leader>7 vip:call DBeaver()<CR>}
 nnoremap <leader>l :set list!<CR>
 
 " from https://github.com/sirupsen/dotfiles/blob/8d232bab79c0032af1b827ad523d77f0f8959037/home/.vimrc#L147
-vnoremap <leader>s :!sqlformat --reindent --keywords upper --identifiers lower -<CR>
+vnoremap <leader>s :!sqlformat --reindent --keywords lower --identifiers lower -<CR>
 
 " from https://vim.fandom.com/wiki/Move_to_next/previous_line_with_same_indentation
 nnoremap <esc>b :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>

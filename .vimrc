@@ -186,6 +186,12 @@ nnoremap <leader>f :let @+=expand('%')<CR>
 " file name with line
 nnoremap <leader>gl :let @+=expand('%') . ":" . line('.')<CR>
 
+" Go to or create scratch file
+nnoremap <leader>sf :call FindOrCreateScratchFile()<CR>
+
+" Toggle Goyo
+nnoremap <leader>g :Goyo<CR>
+
 function! DBeaver() range
   let selection = join(map(getline(a:firstline, a:lastline), 'substitute(v:val, "^\\s*","","")'), "\r")
   let @+ = selection

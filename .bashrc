@@ -274,7 +274,7 @@ alias aep="awsume eac-prod"
 alias aes="awsume eac-staging"
 # "temp time"
 alias tt="sudo mount -o remount,size=10G,noatime /tmp"
-alias kiq="SIDEKIQ_CONCURRENCY=5 bundle exec sidekiq -C config/sidekiq.yml"
+alias kiq="SIDEKIQ_CONCURRENCY=5 nice -n19 bundle exec sidekiq -C config/sidekiq.yml"
 alias rs="bundle exec rails s"
 alias rc="bundle exec rails c"
 

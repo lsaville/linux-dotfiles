@@ -1,5 +1,6 @@
 dunst -conf "$HOME/.config/dunst/dunstrc" &
 dropbox &
+flameshot &
 setxkbmap -option ctrl:nocaps
 ############
 ## mouse

@@ -59,6 +59,8 @@ set cmdheight=3
 " This is now handled on a system level by a line in .Xresources
 set t_ti= t_te=
 
+set re=1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -99,7 +101,7 @@ cnoremap <C-B> <Left>
 cnoremap <C-E> <End>
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " cruise buffer list
 " nnoremap <C-f> :bn<CR>
@@ -351,6 +353,26 @@ function! GitUntrackedChanges()
   copen
 endfunction
 nnoremap <Leader>gc :silent call GitUntrackedChanges()<Cr>
+
+" Populate QF list with linting errors
+function! ProntoTaxJar()
+  let flist = systemlist("vim_pronto_taxjar")
+
+  if len(flist) == 0
+    return
+  endif
+
+  let list = []
+  for f in flist
+    let split = split(f, "*")
+    let dic = { "filename": split[0], "lnum": split[1], "text": split[2] }
+
+    call add(list, dic)
+  endfor
+
+  call setqflist(list)
+  copen
+endfunction
 
 function FindOrCreateScratchFile()
   let l:scratch_file_name = StripNL(system("branch-scratch-name"))

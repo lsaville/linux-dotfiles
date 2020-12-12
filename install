@@ -25,6 +25,17 @@ done
 printf "\n\n"
 
 printf "==============================================\n"
+printf "Setting up .logs\n"
+printf "==============================================\n"
+printf "\n"
+
+if [ -d "$HOME/.logs" ]; then
+  printf "Seems like there's already a .logs folder...\n"
+else
+  mkdir $HOME/.logs
+fi
+
+printf "==============================================\n"
 printf "Installing vim plugins\n"
 printf "==============================================\n"
 printf "\n"
@@ -42,6 +53,7 @@ else
     "pangloss/vim-javascript"
     "junegunn/fzf.vim"
     "junegunn/vim-easy-align"
+    "junegunn/goyo"
     "tpope/vim-tbone"
     "tpope/vim-scriptease"
   )

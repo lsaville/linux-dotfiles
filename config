@@ -52,8 +52,9 @@ for_window [instance="^fzf-menu$" class="Alacritty"] floating enable
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# luke smith emoji thing
-bindsym $mod+u exec --no-startup-id dmenuunicode -b
+# luke smith emoji thing (v slow, fired)
+# bindsym $mod+u exec --no-startup-id dmenuunicode -b
+bindsym $mod+u exec --no-startup-id rofi -show emoji -modi emoji
 
 # lock the screen
 # weird things happen with this line... hangs in bg and then tries to fire on sleep?
@@ -82,7 +83,8 @@ bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 
 # Screenshot
 
-bindsym --release $mod+z exec "scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots'"
+#bindsym --release $mod+z exec "scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots'"
+bindsym --release $mod+z exec "flameshot gui"
 
 # start rofi (a program launcher)
 

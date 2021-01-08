@@ -1,6 +1,8 @@
 dunst -conf "$HOME/.config/dunst/dunstrc" &
 dropbox &
+flameshot &
 setxkbmap -option ctrl:nocaps
+xbacklight -set 5
 ############
 ## mouse
 ############
@@ -19,7 +21,7 @@ setxkbmap -option ctrl:nocaps
 ## speed
 #xinput set-prop 'DELL08AF:00 06CB:76AF Touchpad' 284 1
 #
-xautolock -time 5 -locker "i3lock" -detectsleep &
+#xautolock -time 5 -locker "i3lock" -detectsleep &
 
 sudo mount -o remount,size=16G,noatime /tmp
 

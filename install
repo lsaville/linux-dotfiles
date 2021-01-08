@@ -52,9 +52,9 @@ else
   for plugin in ${PLUGINS[*]};
   do
     printf "\nInstalling ---->  %s\n" $plugin
-    #git clone "http://github.com/$plugin"
+    git clone "http://github.com/$plugin"
     printf "\n"
-    git clone "git@github.com:$plugin"
+    #git clone "git@github.com:$plugin"
   done
 fi
 

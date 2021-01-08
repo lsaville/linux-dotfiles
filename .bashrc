@@ -382,17 +382,17 @@ export ZK_PATH="$HOME/Dropbox/Zettelkasten"
 
 export DISABLE_SPRING=1
 
-function taxjar_prod() {
-  awsume_profile eac-prod
-  kubectl_context production
-  hatch -n readonly -a taxjar run rails c
-}
+#function taxjar_prod() {
+#  awsume_profile eac-prod
+#  kubectl_context production
+#  hatch -n readonly -a taxjar run rails c
+#}
 
-function taxjar_staging() {
-  awsume_profile eac-staging
-  kubectl_context staging
-  hatch -n taxjar -a taxjar-ui run rails c
-}
+#function taxjar_staging() {
+#  awsume_profile eac-staging
+#  kubectl_context staging
+#  hatch -n taxjar -a taxjar-ui run rails c
+#}
 
 #function eac_prod() {
 #  awsume_profile eac-prod
@@ -400,19 +400,19 @@ function taxjar_staging() {
 #  hatch run -n eac -a engine-admin-ui rails console
 #}
 
-function eac_staging() {
-  awsume_profile eac-staging
-  kubectl_context staging
-  hatch run -n eac -a engine-admin-ui
-}
+#function eac_staging() {
+#  awsume_profile eac-staging
+#  kubectl_context staging
+#  hatch run -n eac -a engine-admin-ui
+#}
 
-function kubectl_context() {
-  kubectl config use-context $1
-}
+#function kubectl_context() {
+#  kubectl config use-context $1
+#}
 
-function awsume_profile() {
-  awsume $1
-}
+#function awsume_profile() {
+#  awsume $1
+#}
 
 # This wrecks my current prompt... powerline is experimental for i3status-rust
 #powerline-daemon -q
@@ -420,7 +420,7 @@ function awsume_profile() {
 #POWERLINE_BASH_SELECT=1
 #. /usr/share/powerline/bindings/bash/powerline.sh
 source ~/git-completion.bash
-source <(kubectl completion bash)
+#source <(kubectl completion bash)
 
 # fzf-menu was throwing ls errors... these don't exist
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -429,3 +429,4 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
+source "$HOME/.cargo/env"

@@ -53,7 +53,8 @@ for_window [instance="^fzf-menu$" class="Alacritty"] floating enable
 bindsym $mod+Shift+q kill
 
 # luke smith emoji thing
-bindsym $mod+u exec --no-startup-id dmenuunicode -b
+# bindsym $mod+u exec --no-startup-id dmenuunicode -b
+bindsym $mod+u exec --no-startup-id rofi -show emoji -modi emoji
 
 # lock the screen
 # weird things happen with this line... hangs in bg and then tries to fire on sleep?
@@ -80,9 +81,14 @@ bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
+# Brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+
 # Screenshot
 
-bindsym --release $mod+z exec "scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots'"
+#bindsym --release $mod+z exec "scrot -s '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots'"
+bindsym --release $mod+z exec "flameshot gui"
 
 # start rofi (a program launcher)
 
@@ -148,51 +154,59 @@ bindsym $mod+a focus parent
 
 # Workspace variables
 #browser
-set $workspace1 "1: "
-set $workspace2 "2: "
-set $workspace6 "6: "
-set $workspace7 "7: "
+#set $workspace1 "1: "
+#set $workspace2 "2: "
+#set $workspace6 "6: "
+#set $workspace7 "7: "
 
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
+#bindsym $mod+1 workspace $workspace1
+#bindsym $mod+2 workspace $workspace2
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
+#bindsym $mod+6 workspace $workspace6
+#bindsym $mod+7 workspace $workspace7
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
+#bindsym $mod+Shift+1 move container to workspace $workspace1
+#bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
+#bindsym $mod+Shift+6 move container to workspace $workspace6
+#bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-workspace $workspace1 output HDMI-1
-workspace $workspace2 output HDMI-1
-workspace 3 output HDMI-1
-workspace 4 output HDMI-1
-workspace 5 output HDMI-1
-workspace $workspace6 output HDMI-2
-workspace $workspace7 output HDMI-2
-workspace 8 output HDMI-2
-workspace 9 output HDMI-2
-workspace 10 output HDMI-2
+#workspace $workspace1 output HDMI-1
+#workspace $workspace2 output HDMI-1
+#workspace 3 output HDMI-1
+#workspace 4 output HDMI-1
+#workspace 5 output HDMI-1
+#workspace $workspace6 output HDMI-2
+#workspace $workspace7 output HDMI-2
+#workspace 8 output HDMI-2
+#workspace 9 output HDMI-2
+#workspace 10 output HDMI-2
 
 #Application auto-assignment
-#for_window [class="Firefox"] move to workspace $workspace1
-for_window [class="Slack"] move to workspace $workspace2
-#for_window [class="Gnome-terminal"] move to workspace $workspace6
-for_window [class="Spotify"] move to workspace $workspace7
+for_window [class="Firefox"] move to workspace 1
+#for_window [class="Slack"] move to workspace $workspace2
+for_window [class="Alacritty"] move to workspace 6
+#for_window [class="Spotify"] move to workspace $workspace7
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -259,9 +273,9 @@ hide_edge_borders both
 #         }
 # }
 bar {
-    font pango:PowerlineSymbols, FontAwesome 13
+    font pango:SourceCodePro, FontAwesome 5 Free
     position top
-    status_command /usr/local/bin/i3status-rs .config/i3/status.toml
+    status_command /usr/bin/i3status-rs .config/i3/status.toml
     colors {
         separator #ffffff
         background #222222
@@ -274,11 +288,11 @@ bar {
 }
 
 
-exec --no-startup-id i3-msg "workspace $workspace1; exec firefox"
-exec slack
-exec --no-startup-id i3-msg "workspace $workspace6; exec alacritty"
-exec spotify
-exec --no-startup-id "allow_rgb10_configs=false picom --config ~/.config/picom/picom.conf -b"
+exec --no-startup-id i3-msg "workspace 1; exec firefox"
+#exec slack
+exec --no-startup-id i3-msg "workspace 6; exec alacritty"
+#exec spotify
+#exec --no-startup-id "allow_rgb10_configs=false picom --config ~/.config/picom/picom.conf -b"
 exec unclutter --timeout 1 --fork
 
 #set background image

@@ -374,6 +374,26 @@ function! ProntoTaxJar()
   copen
 endfunction
 
+" Populate QF list with linting errors
+function! Pronto()
+  let flist = systemlist("vim_pronto")
+
+  if len(flist) == 0
+    return
+  endif
+
+  let list = []
+  for f in flist
+    let split = split(f, "*")
+    let dic = { "filename": split[0], "lnum": split[1], "text": split[2] }
+
+    call add(list, dic)
+  endfor
+
+  call setqflist(list)
+  copen
+endfunction
+
 function FindOrCreateScratchFile()
   let l:scratch_file_name = StripNL(system("branch-scratch-name"))
   execute "e ".fnameescape("../scratch/" . l:scratch_file_name)

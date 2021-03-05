@@ -52,6 +52,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias r='ranger'
 
 alias meow='mpg123 -q ~/git/linux-dotfiles/jaguar2.mp3'
 
@@ -354,6 +355,7 @@ export FZF_DEFAULT_COMMAND='rg \
 --glob "!.git/*" \
 --glob "!node_modules/*" \
 --glob "!deps/*" \
+--glob "!tmp/*" \
 --glob "!_build/*"'
 
 # from zk trial -> https://github.com/sirupsen/zk

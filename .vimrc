@@ -3,8 +3,14 @@ filetype off
 
 " Vimwiki... bad things start to happen with filetype plugin on and html.erb
 " files. This is an outstanding mystery
-"filetype plugin on
-"let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+filetype plugin on
+let g:vimwiki_list = [
+  \{'path': '~/git/taxjar/scratch/', 'syntax': 'markdown', 'ext': '.md'},
+  \{'path': '~/Dropbox/wiki_wiki/', 'syntax': 'markdown', 'ext': '.md'},
+  \{'path': '~/Dropbox/old_vimwiki/', 'syntax': 'markdown', 'ext': '.md'}
+  \]
+let g:vimwiki_global_ext = 0
+syntax on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
@@ -135,6 +141,8 @@ nnoremap <leader>c :.!awk -F, '{print NF}'<CR>
 " Kill html tags. Makes it easy to manually scrape web-content
 nnoremap <leader>kh :%s/<\([^<]*\)>//g<CR>
 
+vnoremap gy "+y
+
 " comment jsx
 vnoremap <leader>cc :s/\(\s*\)\(.*\)/\1{\/*\2*\/}/ \| :nohl<CR>
 " uncomment jsx
@@ -172,6 +180,7 @@ vnoremap <esc>e :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . li
 " -1 gets rid of having a blank line at top
 nnoremap <leader>m1 :-1read $HOME/.vim/final-commit-msg.txt<CR>C
 nnoremap <leader>m2 :-1read $HOME/.vim/tj-pr.txt<CR>o
+nnoremap <leader>m3 :-1read $HOME/.vim/sre.txt<CR>
 
 " Get persisted bit from pry session
 " nnoremap <leader>p :.! ruby -e "require 'json'; pp JSON.parse(File.read('/tmp/pry-output.json'))"<CR>
@@ -453,3 +462,13 @@ command! ZKR call fzf#run(fzf#wrap({
 
 autocmd BufNew,BufNewFile,BufRead ~/Documents/Zettelkasten/*.md call ZettelkastenSetup()
 
+function! OpenURLUnderCursor()
+  let s:uri = expand('<cWORD>')
+  let s:uri = substitute(s:uri, '?', '\\?', '')
+  let s:uri = shellescape(s:uri, 1)
+  if s:uri != ''
+    silent exec "!xdg-open '".s:uri."'"
+    :redraw!
+  endif
+endfunction
+nnoremap gx :call OpenURLUnderCursor()<CR>

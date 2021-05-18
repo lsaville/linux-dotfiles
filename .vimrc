@@ -279,6 +279,9 @@ let NERDTreeShowHidden=1
 
 "Let vim know from whence springs fzf
 set rtp+=~/.fzf
+"set rtp+=~/.fzf/bin/fzf
+"
+let g:fzf_preview_window = ['right:70%', 'ctrl-/']
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -297,7 +300,7 @@ let g:fzf_colors =
 
 " Default fzf layout
 " - down / up / left / right
-let g:fzf_layout = { 'up': '~20%' }
+let g:fzf_layout = { 'up': '~70%' }
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -472,3 +475,15 @@ function! OpenURLUnderCursor()
   endif
 endfunction
 nnoremap gx :call OpenURLUnderCursor()<CR>
+
+function! Light()
+  silent! set background=light
+  silent! colorscheme PaperColor
+endfunction
+command! Light call Light()
+
+function! Dark()
+  silent! set background=dark
+  silent! colorscheme OceanicNext
+endfunction
+command! Dark call Dark()

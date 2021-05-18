@@ -64,8 +64,10 @@ bindsym $mod+x exec /home/$USER/.config/i3/lock
 
 
 # stop and start notifications
-bindsym $mod+c exec "notify-send 'DUNST_COMMAND_PAUSE'"
-bindsym $mod+b exec "notify-send 'DUNST_COMMAND_RESUME'"
+#bindsym $mod+c exec "notify-send 'DUNST_COMMAND_PAUSE'"
+#bindsym $mod+b exec "notify-send 'DUNST_COMMAND_RESUME'"
+bindsym $mod+c exec "dunstctl set-paused true"
+bindsym $mod+b exec "dunstctl set-paused false"
 
 # Media Keys
 # Pulse Audio controls

@@ -275,9 +275,11 @@ alias aep="awsume eac-prod -r --role-duration 28800"
 alias aes="awsume eac-staging -r --role-duration 28800"
 # "temp time"
 alias tt="sudo mount -o remount,size=10G,noatime /tmp"
-alias kiq="SIDEKIQ_CONCURRENCY=5 nice -n19 bundle exec sidekiq -C config/sidekiq.yml"
+alias kiq="SIDEKIQ_LOGGING=debug SIDEKIQ_CONCURRENCY=1 nice -n19 bundle exec sidekiq -C config/sidekiq.yml"
 alias rs="bundle exec rails s"
 alias rc="bundle exec rails c"
+alias norg="gron --ungron"
+alias ungron="gron --ungron"
 
 #combo functions from Sal Espinosas bash profile
 function cs () {

@@ -54,7 +54,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias meow='mpg123 -q ~/git/linux-dotfiles/jaguar2.mp3'
-
+alias r='ranger'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -430,3 +430,4 @@ export LD_LIBRARY_PATH=/usr/local/lib
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
 source "$HOME/.cargo/env"
+export ERL_AFLAGS="-kernel shell_history enabled"

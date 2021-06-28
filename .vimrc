@@ -3,8 +3,12 @@ filetype off
 
 " Vimwiki... bad things start to happen with filetype plugin on and html.erb
 " files. This is an outstanding mystery
-"filetype plugin on
-"let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+filetype plugin on
+let g:vimwiki_list = [
+  \{'path': '~/Dropbox/wiki_wiki/', 'syntax': 'markdown', 'ext': '.md'},
+  \{'path': '~/Dropbox/old_vimwiki/', 'syntax': 'markdown', 'ext': '.md'}
+  \]
+syntax on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
@@ -21,6 +25,8 @@ let s:uname = substitute(system("uname -s"), '\n', '', '')
 " Makes leader a space
 let mapleader = " "
 let maplocalleader = "\\"
+
+let g:netrw_browsex_viewer= "xdg-open"
 
 set number
 set cursorcolumn
@@ -411,3 +417,13 @@ command! ZKR call fzf#run(fzf#wrap({
 
 autocmd BufNew,BufNewFile,BufRead ~/Documents/Zettelkasten/*.md call ZettelkastenSetup()
 
+function! OpenURLUnderCursor()
+  let s:uri = expand('<cWORD>')
+  let s:uri = substitute(s:uri, '?', '\\?', '')
+  let s:uri = shellescape(s:uri, 1)
+  if s:uri != ''
+    silent exec "!xdg-open '".s:uri."'"
+    :redraw!
+  endif
+endfunction
+nnoremap gx :call OpenURLUnderCursor()<CR>

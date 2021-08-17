@@ -141,6 +141,8 @@ nnoremap <leader>c :.!awk -F, '{print NF}'<CR>
 " Kill html tags. Makes it easy to manually scrape web-content
 nnoremap <leader>kh :%s/<\([^<]*\)>//g<CR>
 
+vnoremap <leader>o :'<,'>Silicon ~/Pictures/Screenshots/
+
 vnoremap gy "+y
 
 " comment jsx
@@ -165,7 +167,8 @@ nnoremap <leader>7 vip:call DBeaver()<CR>}
 nnoremap <leader>l :set list!<CR>
 
 " from https://github.com/sirupsen/dotfiles/blob/8d232bab79c0032af1b827ad523d77f0f8959037/home/.vimrc#L147
-vnoremap <leader>s :!sqlformat --reindent --keywords lower --identifiers lower -<CR>
+"vnoremap <leader>s :!sqlformat --reindent --keywords lower --identifiers lower -<CR>
+vnoremap <leader>s :!sqlformat --reindent --keywords upper --identifiers lower -<CR>
 
 " from https://vim.fandom.com/wiki/Move_to_next/previous_line_with_same_indentation
 nnoremap <esc>b :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>

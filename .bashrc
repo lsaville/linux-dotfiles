@@ -55,6 +55,7 @@ alias l='ls -CF'
 alias r='ranger'
 
 alias meow='mpg123 -q ~/git/linux-dotfiles/jaguar2.mp3'
+alias tj_scripts='tj_scripts --cwd ~/git/taxjar/taxjar/'
 
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -386,37 +387,57 @@ export ZK_PATH="$HOME/Dropbox/Zettelkasten"
 
 export DISABLE_SPRING=1
 
-function taxjar_prod() {
-  awsume_profile eac-prod
-  kubectl_context production
-  hatch -n readonly -a taxjar run rails c
+function stag1 () {
+  awsume staging
+  kubectl config use-context stag1
 }
 
-function taxjar_staging() {
-  awsume_profile eac-staging
-  kubectl_context staging
-  hatch -n taxjar -a taxjar-ui run rails c
+function stag2 () {
+  awsume staging
+  kubectl config use-context stag2
 }
 
-#function eac_prod() {
-#  awsume_profile eac-prod
-#  kubectl_context production
-#  hatch run -n eac -a engine-admin-ui rails console
-#}
-
-function eac_staging() {
-  awsume_profile eac-staging
-  kubectl_context staging
-  hatch run -n eac -a engine-admin-ui
+function prod1 () {
+  awsume prod
+  kubectl config use-context prod1
 }
 
-function kubectl_context() {
-  kubectl config use-context $1
+function prod2 () {
+  awsume prod
+  kubectl config use-context prod2
 }
 
-function awsume_profile() {
-  awsume $1
-}
+# function taxjar_prod() {
+#   awsume_profile eac-prod
+#   kubectl_context production
+#   hatch -n readonly -a taxjar run rails c
+# }
+# 
+# function taxjar_staging() {
+#   awsume_profile eac-staging
+#   kubectl_context staging
+#   hatch -n taxjar -a taxjar-ui run rails c
+# }
+# 
+# function eac_prod() {
+#   awsume_profile eac-prod
+#   kubectl_context production
+#   #hatch run -n eac -a engine-admin-ui rails console
+# }
+# 
+# function eac_staging() {
+#   awsume_profile eac-staging
+#   kubectl_context staging
+#   #hatch run -n eac -a engine-admin-ui
+# }
+# 
+# function kubectl_context() {
+#   kubectl config use-context $1
+# }
+# 
+# function awsume_profile() {
+#   awsume $1
+# }
 
 # This wrecks my current prompt... powerline is experimental for i3status-rust
 #powerline-daemon -q
@@ -433,3 +454,5 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
+
+source /home/gumption/.config/broot/launcher/bash/br

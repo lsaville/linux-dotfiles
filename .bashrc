@@ -235,7 +235,7 @@ set_prompts() {
     PS1+="\[\033]0;\w\007\]"
 
     PS1+="\n" # newline
-    PS1+="\[$blue\]\w" # working directory
+    PS1+="\[$purple\]\u @ \[$blue\]\w" # working directory
     PS1+="\$(prompt_git \"$reset on $bold$cyan\")" # git repository details
     PS1+="\n"
     PS1+="\[$reset$white\]\$ \[$reset\]" # $ (and reset color)

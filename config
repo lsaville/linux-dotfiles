@@ -265,7 +265,7 @@ hide_edge_borders both
 bar {
     font pango:PowerlineSymbols, FontAwesome 13
     position top
-    status_command /usr/local/bin/i3status-rs .config/i3/status.toml
+    status_command ~/.cargo/bin/i3status-rs .config/i3/status.toml
     colors {
         separator #ffffff
         background #222222

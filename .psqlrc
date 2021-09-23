@@ -13,5 +13,6 @@
 \set VERBOSITY verbose
 \set HISTFILE ~/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
+\set HISTSIZE -1
 --SET default_transaction_read_only = true;
 \unset QUIET

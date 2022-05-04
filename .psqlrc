@@ -1,10 +1,12 @@
 \set QUIET
 \pset null '[NULL]'
-\pset linestyle unicode
--- ^^^ normally ascii
-\pset border 2
--- ^^^ normally 1
-\setenv PAGER 'pspg -s 18 -X --no-mouse'
+
+-- pspg things
+--\pset linestyle unicode
+---- ^^^ normally ascii
+--\pset border 2
+---- ^^^ normally 1
+----\setenv PAGER 'pspg -s 18 -X --no-mouse'
 
 \set PROMPT1 '%n@%m:%>/%/%x%#\n%`printf "%*s" $(tput cols) "" | sed "s/ /-/g"`\n'
 \set PROMPT2 ''

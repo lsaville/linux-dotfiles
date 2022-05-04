@@ -1,14 +1,18 @@
 [user]
-	email = lee.saville@taxjar.com
-	name = Lee Saville
+	email = "saville@stripe.com"
+	name = "Lee Saville"
+[fetch]
+  prune = true
 [push]
 	default = simple
 [core]
 	editor = vim
-  excludesfile = /home/gumption/.gitignore_global
+  excludesfile = $HOME/.gitignore_global
 	autocrlf = input
 	#pager = diff-so-fancy | less --tabs=4 -RFX
-  pager = delta
+  #pager = delta
+  preloadindex = true
+	deltabasecachelimit = 4g
 [interactive]
     diffFilter = delta --color-only
 [alias]
@@ -60,3 +64,8 @@
   verbose = true
 [credential]
 	helper = cache --timeout 3600
+[help]
+	# Automatically correct and execute mistyped commands such as `git stauts`
+	autocorrect = 1
+[feature]
+	manyfiles = true

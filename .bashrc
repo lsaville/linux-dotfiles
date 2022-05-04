@@ -53,6 +53,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias r='ranger'
+alias pnr='git co master-passing-tests && git pull origin master-passing-tests && git co - && git rebase master-passing-tests'
 
 alias meow='mpg123 -q ~/git/linux-dotfiles/jaguar2.mp3'
 
@@ -234,7 +235,7 @@ set_prompts() {
     PS1+="\[\033]0;\w\007\]"
 
     PS1+="\n" # newline
-    PS1+="\[$blue\]\w" # working directory
+    PS1+="\[$purple\]\u @ \[$blue\]\w" # working directory
     PS1+="\$(prompt_git \"$reset on $bold$cyan\")" # git repository details
     PS1+="\n"
     PS1+="\[$reset$white\]\$ \[$reset\]" # $ (and reset color)
@@ -262,7 +263,7 @@ alias awsume=". awsume"
 alias ga="git add"
 alias gb="git branch"
 alias gd="git diff --patience --ignore-space-change"
-alias gh="git log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short"
+#alias gh="git log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short"
 alias gc="git commit -m"
 alias gs="git status"
 
@@ -270,9 +271,9 @@ alias nuke="bundle exec rake db:drop db:create db:migrate db:seed db:test:prepar
 alias be="bundle exec"
 alias reload='source ~/.bashrc'
 alias o="cs git/optimizely_server/public/optimizely"
-alias fd="rg --hidden --ignore-case"
-alias aep="awsume eac-prod -r --role-duration 28800"
-alias aes="awsume eac-staging -r --role-duration 28800"
+#alias fd="rg --hidden --ignore-case"
+alias aep="awsume eac_production -r --role-duration 28800"
+alias aes="awsume eac_staging -r --role-duration 28800"
 # "temp time"
 alias tt="sudo mount -o remount,size=10G,noatime /tmp"
 alias kiq="SIDEKIQ_LOGGING=debug SIDEKIQ_CONCURRENCY=1 nice -n19 bundle exec sidekiq -C config/sidekiq.yml"
@@ -339,9 +340,9 @@ export PATH=$PATH:$HOME/go/bin/
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-. $HOME/.asdf/asdf.sh
+#. $HOME/.asdf/asdf.sh
 
-. $HOME/.asdf/completions/asdf.bash
+#. $HOME/.asdf/completions/asdf.bash
 
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
@@ -386,37 +387,48 @@ export ZK_PATH="$HOME/Dropbox/Zettelkasten"
 
 export DISABLE_SPRING=1
 
-function taxjar_prod() {
-  awsume_profile eac-prod
-  kubectl_context production
-  hatch -n readonly -a taxjar run rails c
-}
+alias awsume_eac_stag1="awsume eac_staging && kubectl config use-context stag1"
+alias awsume_eac_stag2="awsume eac_staging && kubectl config use-context stag2"
+alias awsume_eac_prod1="awsume eac_production && kubectl config use-context prod1"
+# prod2 has database proxy
+alias awsume_eac_prod2="awsume eac_production && kubectl config use-context prod2"
 
-function taxjar_staging() {
-  awsume_profile eac-staging
-  kubectl_context staging
-  hatch -n taxjar -a taxjar-ui run rails c
-}
+alias awsume_exs_stag1="awsume calcs_admin_staging && kubectl config use-context stag1"
+alias awsume_exs_stag2="awsume calcs_admin_staging && kubectl config use-context stag2"
+alias awsume_exs_prod1="awsume calcs_admin_production && kubectl config use-context prod1"
+# prod2 has database proxy
+alias awsume_exs_prod2="awsume calcs_admin_production && kubectl config use-context prod2"
 
-#function eac_prod() {
-#  awsume_profile eac-prod
-#  kubectl_context production
-#  hatch run -n eac -a engine-admin-ui rails console
-#}
 
-function eac_staging() {
-  awsume_profile eac-staging
-  kubectl_context staging
-  hatch run -n eac -a engine-admin-ui
-}
+alias pay_eac='pay ssh --force-tty "cd /pay/src/engine-admin-console; source ./bin/devbox_env; /bin/bash"'
 
-function kubectl_context() {
-  kubectl config use-context $1
-}
+alias bb="bazel build //uppsala/src/main/java/com/stripe/monetization/tax/... //uppsala/src/test/java/com/stripe/monetization/tax/..."
+alias bt="bazel build //uppsala/src/test/java/com/stripe/monetization/tax/..."
+alias bm="bazel build //uppsala/src/main/java/com/stripe/monetization/tax/..."
+# alias pay_filing='pay ssh --force-tty "cd /pay/src/filing_api; source ./bin/devbox_env; /bin/bash"'
+# alias pay_tj='pay ssh --force-tty "cd /pay/src/taxjar; source ./bin/devbox_env; /bin/bash"'
+# alias pay_centauri='pay ssh --force-tty "cd /pay/src/centauri; source ./bin/devbox_env; /bin/bash"'
 
-function awsume_profile() {
-  awsume $1
-}
+# alias sync_env_tj='pay copy ~/stripe/taxjar/.env.development.local qa-mydev:/pay/src/taxjar/.env.development.local'
+# alias sync_env_centauri='pay copy ~/stripe/centauri/.env.development.local qa-mydev:/pay/src/centauri/.env.development.local'
+# These take about 2 seconds longer than the commands above, but also pull down the latest ENV vars from Confidant onto the dev box.
+# alias sync_env_tj='pay ssh "/pay/src/pay-server/devbox/dev_services/scripts/taxjar/populate_dotenv_files.sh taxjar" && pay copy ~/stripe/taxjar/.env.development.local qa-mydev:/pay/src/taxjar/.env.development.local'
+# alias sync_env_centauri='pay ssh "/pay/src/pay-server/devbox/dev_services/scripts/taxjar/populate_dotenv_files.sh centauri" && pay copy ~/stripe/centauri/.env.development.local qa-mydev:/pay/src/centauri/.env.development.local'
+
+# alias awsume_staging="awsume staging && kubectl config use-context staging"
+# alias awsume_production="awsume production && kubectl config use-context production"
+# 
+# alias staging_console="cd ~/stripe/taxjar-console && docker-compose exec console zsh -i -c 'awsume staging && kubectl config use-context staging && hatch run -n taxjar -a taxjar-ui rails c'"
+#alias staging_console="cd ~/stripe/taxjar-console && docker-compose exec console zsh -i -c 'awsume staging && kubectl config use-context staging && hatch run -n taxjar -a taxjar-ui rails c'"
+# alias staging_shell="cd ~/stripe/taxjar-console && docker-compose exec console zsh -i -c 'awsume staging && kubectl config use-context staging && hatch run -n taxjar -a taxjar-ui /bin/bash'"
+# 
+# alias prod_read_console="cd ~/stripe/taxjar-console && docker-compose exec console zsh -i -c 'awsume production && kubectl config use-context production && hatch run -n readonly -a taxjar rails c'"
+# alias prod_write_console="cd ~/stripe/taxjar-console && docker-compose exec console zsh -i -c 'awsume production && kubectl config use-context production && hatch run -n taxjar-ui -a taxjar rails c'"
+# alias prod_shell="cd ~/stripe/taxjar-console && docker-compose exec console zsh -i -c 'awsume production && kubectl config use-context production && hatch run -n taxjar -a taxjar-ui /bin/bash'"
+# 
+# alias dev_db_tunnel="ssh -L 3333:localhost:5432 '$USER'@'$(pay show-host)'"
+# 
+# alias docker-login='awsume default && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 708017133719.dkr.ecr.us-east-1.amazonaws.com'
 
 # This wrecks my current prompt... powerline is experimental for i3status-rust
 #powerline-daemon -q

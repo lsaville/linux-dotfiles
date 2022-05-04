@@ -51,6 +51,7 @@ else
     "vim-airline/vim-airline"
     "elixir-editors/vim-elixir"
     "pangloss/vim-javascript"
+    "junegunn/fzf"
     "junegunn/fzf.vim"
     "junegunn/vim-easy-align"
     "junegunn/goyo"

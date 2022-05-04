@@ -12,6 +12,9 @@ let g:vimwiki_list = [
 let g:vimwiki_global_ext = 0
 syntax on
 
+" avoid stripe shell slowdown
+set shell=/bin/bash\ --norc\ -i
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -137,10 +140,12 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>eb :e ~/.bashrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>c :.!awk -F, '{print NF}'<CR>
+nnoremap <leader>ct :.!awk -F"\t" '{print NF}'<CR>
 
 " Kill html tags. Makes it easy to manually scrape web-content
 nnoremap <leader>kh :%s/<\([^<]*\)>//g<CR>
 
+vnoremap <leader>j :!pandoc -f markdown -t jira -<CR>
 vnoremap gy "+y
 
 " comment jsx
@@ -278,8 +283,10 @@ let NERDTreeShowHidden=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Let vim know from whence springs fzf
-set rtp+=~/.fzf
+"set rtp+=~/.fzf
 "set rtp+=~/.fzf/bin/fzf
+set rtp+=/usr/local/bin/fzf
+set rtp+=/usr/local/opt/bin/fzf
 "
 let g:fzf_preview_window = ['right:70%', 'ctrl-/']
 
@@ -470,7 +477,7 @@ function! OpenURLUnderCursor()
   let s:uri = substitute(s:uri, '?', '\\?', '')
   let s:uri = shellescape(s:uri, 1)
   if s:uri != ''
-    silent exec "!xdg-open '".s:uri."'"
+    silent exec "!open '".s:uri."'"
     :redraw!
   endif
 endfunction
@@ -487,3 +494,13 @@ function! Dark()
   silent! colorscheme OceanicNext
 endfunction
 command! Dark call Dark()
+
+function! LivegrepFzf(query, fullscreen)
+  let command_fmt = 'lg repo:'..substitute(getcwd(), '^.*/', '', '')." %s | gsed -n \'s/stripe\\-internal\\/\\(zoolander\\|pay-server\\)://gp\'"
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 0, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+command! -nargs=* -bang Lg call LivegrepFzf(<q-args>, <bang>0)
+nnoremap <silent> <leader>l :Lg<cr>

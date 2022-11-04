@@ -89,7 +89,7 @@ export PAGER="less";
 #export LESS="-iMSx4 -RFX"
 
 # set vim as default editor
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # The following ported from my macbook

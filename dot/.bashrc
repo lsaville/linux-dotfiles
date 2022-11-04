@@ -89,7 +89,7 @@ export PAGER="less";
 #export LESS="-iMSx4 -RFX"
 
 # set vim as default editor
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # The following ported from my macbook
@@ -258,7 +258,7 @@ man() {
 		man "$@"
 }
 
-#alias awsume=". awsume"
+alias awsume=". awsume"
 # shortcuts for git
 alias ga="git add"
 alias gb="git branch"
@@ -270,17 +270,17 @@ alias gs="git status"
 alias nuke="bundle exec rake db:drop db:create db:migrate db:seed db:test:prepare"
 alias be="bundle exec"
 alias reload='source ~/.bashrc'
-#alias o="cs git/optimizely_server/public/optimizely"
+alias o="cs git/optimizely_server/public/optimizely"
 #alias fd="rg --hidden --ignore-case"
-#alias aep="awsume eac_production -r --role-duration 28800"
-#alias aes="awsume eac_staging -r --role-duration 28800"
+alias aep="awsume eac_production -r --role-duration 28800"
+alias aes="awsume eac_staging -r --role-duration 28800"
 # "temp time"
-#alias tt="sudo mount -o remount,size=10G,noatime /tmp"
-#alias kiq="SIDEKIQ_LOGGING=debug SIDEKIQ_CONCURRENCY=1 nice -n19 bundle exec sidekiq -C config/sidekiq.yml"
-#alias rs="bundle exec rails s"
-#alias rc="bundle exec rails c"
-#alias norg="gron --ungron"
-#alias ungron="gron --ungron"
+alias tt="sudo mount -o remount,size=10G,noatime /tmp"
+alias kiq="SIDEKIQ_LOGGING=debug SIDEKIQ_CONCURRENCY=1 nice -n19 bundle exec sidekiq -C config/sidekiq.yml"
+alias rs="bundle exec rails s"
+alias rc="bundle exec rails c"
+alias norg="gron --ungron"
+alias ungron="gron --ungron"
 
 #combo functions from Sal Espinosas bash profile
 function cs () {
@@ -328,15 +328,15 @@ function notify {
 }
 
 #PATH=/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/.rbenv/bin:/home/lee/.rbenv/shims:/home/lee/.rbenv/bin:/home/lee/bin:/home/lee/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/lee/.phantomjs/phantomjs/bin
-#export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
+export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 #export PATH="$HOME/.rbenv/bin:$PATH"
 #export PATH="$HOME/.cargo/bin:$PATH"
 # This is a quick fix for awsume... should probably link this elsewhere
-#export PATH="$HOME/.local/bin:$PATH"
-#export PATH=$PATH:/usr/local/go/bin
-#export PATH=$PATH:$HOME/go/bin/
+export PATH="$HOME/.local/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin/
 #export NODEJS_HOME=/usr/local/lib/nodejs/node-v11.6.0-linux-x64/bin
 #export PATH=$NODEJS_HOME:$PATH
 
@@ -388,25 +388,25 @@ export FZF_DEFAULT_COMMAND='rg \
 #    tmux send-keys -t \{left\} Enter \
 #  ]\""
 
-#export PATH=$PATH:$HOME/git/zk/bin
-#export ZK_PATH="$HOME/Dropbox/Zettelkasten"
+export PATH=$PATH:$HOME/git/zk/bin
+export ZK_PATH="$HOME/Dropbox/Zettelkasten"
 
-#export DISABLE_SPRING=1
+export DISABLE_SPRING=1
 
-#alias awsume_eac_stag1="awsume eac_staging && kubectl config use-context stag1"
-#alias awsume_eac_stag2="awsume eac_staging && kubectl config use-context stag2"
-#alias awsume_eac_prod1="awsume eac_production && kubectl config use-context prod1"
-## prod2 has database proxy
-#alias awsume_eac_prod2="awsume eac_production && kubectl config use-context prod2"
+alias awsume_eac_stag1="awsume eac_staging && kubectl config use-context stag1"
+alias awsume_eac_stag2="awsume eac_staging && kubectl config use-context stag2"
+alias awsume_eac_prod1="awsume eac_production && kubectl config use-context prod1"
+# prod2 has database proxy
+alias awsume_eac_prod2="awsume eac_production && kubectl config use-context prod2"
 
-#alias awsume_exs_stag1="awsume calcs_admin_staging && kubectl config use-context stag1"
-#alias awsume_exs_stag2="awsume calcs_admin_staging && kubectl config use-context stag2"
-#alias awsume_exs_prod1="awsume calcs_admin_production && kubectl config use-context prod1"
-## prod2 has database proxy
-#alias awsume_exs_prod2="awsume calcs_admin_production && kubectl config use-context prod2"
+alias awsume_exs_stag1="awsume calcs_admin_staging && kubectl config use-context stag1"
+alias awsume_exs_stag2="awsume calcs_admin_staging && kubectl config use-context stag2"
+alias awsume_exs_prod1="awsume calcs_admin_production && kubectl config use-context prod1"
+# prod2 has database proxy
+alias awsume_exs_prod2="awsume calcs_admin_production && kubectl config use-context prod2"
 
 
-#alias pay_eac='pay ssh --force-tty "cd /pay/src/engine-admin-console; source ./bin/devbox_env; /bin/bash"'
+alias pay_eac='pay ssh --force-tty "cd /pay/src/engine-admin-console; source ./bin/devbox_env; /bin/bash"'
 
 alias bb="bazel build //uppsala/src/main/java/com/stripe/monetization/tax/... //uppsala/src/test/java/com/stripe/monetization/tax/..."
 alias bt="bazel build //uppsala/src/test/java/com/stripe/monetization/tax/..."
@@ -441,7 +441,7 @@ alias bm="bazel build //uppsala/src/main/java/com/stripe/monetization/tax/..."
 #POWERLINE_BASH_CONTINUATION=1
 #POWERLINE_BASH_SELECT=1
 #. /usr/share/powerline/bindings/bash/powerline.sh
-source ~/git-completion.bash
+#source ~/git-completion.bash
 source <(kubectl completion bash)
 
 # fzf-menu was throwing ls errors... these don't exist
@@ -449,6 +449,6 @@ source <(kubectl completion bash)
 #export PATH="/usr/local/lib:$PATH/"
 #export LD_LIBRARY_PATH=/usr/local/lib
 
-#[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
 #. "$HOME/.cargo/env"

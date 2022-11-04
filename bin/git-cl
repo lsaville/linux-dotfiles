@@ -1,3 +1,0 @@
-BRANCH=($(git branch | fzf -m))
-
-git checkout $BRANCH

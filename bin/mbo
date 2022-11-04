@@ -1,4 +1,0 @@
-#!/bin/bash
-
-#xrandr --output DP1 --primary --auto --output eDP1 --off
-xrandr --output DP2 --primary --auto --output eDP1 --off

@@ -1,75 +1,128 @@
 #!/bin/bash
 
+function print_banner() {
+  printf "\n\n"
+  printf "==============================================\n"
+  printf "$1\n"
+  printf "==============================================\n"
+  printf "\n"
+}
+
 # This script assumes that you've set up ssh with github
 
-printf "==============================================\n"
-printf "Linking dotfiles to home\n"
-printf "==============================================\n"
-printf "\n"
+print_banner "Linking dot/* to ~/"
 
-for file in $(find $(pwd) -maxdepth 1 -type f -name '.*'); do
-	ln -vsf $file $HOME
-done
+#for file in $(find $(pwd) -maxdepth 1 -type f -name '.*'); do
+#	ln -vsf $file $HOME
+#done
 
-printf "\n\n"
+print_banner "Linking dot_config to ~/.config"
 
-printf "==============================================\n"
-printf "Linking binfiles to /usr/local/bin\n"
-printf "==============================================\n"
-printf "\n"
+# These are all multiple folders nested at ~/.config/
+# ranger config
+# nvim config
+# karabiner
+# alacritty
+# skhd
+# tmuxinator
+# yabai
+#
+# a few others from the old machine:
+# flameshot
+# gh
 
-for file in $(find $(pwd)/bin -type f -not -name 'deploy*'); do
-	sudo ln -vsf $file /usr/local/bin/
-done
+print_banner "Linking bin/* to /usr/local/bin"
 
-printf "\n\n"
+#for file in $(find $(pwd)/bin -type f -not -name 'deploy*'); do
+#	sudo ln -vsf $file /usr/local/bin/
+#done
 
-printf "==============================================\n"
-printf "Setting up .logs\n"
-printf "==============================================\n"
-printf "\n"
+print_banner "Seting up ~/.logs"
 
-if [ -d "$HOME/.logs" ]; then
-  printf "Seems like there's already a .logs folder...\n"
-else
-  mkdir $HOME/.logs
-fi
+# This goes along with the config in .bashrc regarding keeping daily logs of commands
+#if [ -d "$HOME/.logs" ]; then
+#  printf "Seems like there's already a .logs folder...\n"
+#else
+#  mkdir $HOME/.logs
+#fi
 
-printf "==============================================\n"
-printf "Installing vim plugins\n"
-printf "==============================================\n"
-printf "\n"
+print_banner "Adding source of .bashrc to .bash_profile"
 
-if [ -d "$HOME/.vim" ]; then
-  printf "Seems like there's already a .vim folder...\n"
-else
-  PACK_DIR=$HOME/.vim/pack/foo/start/
-  PLUGINS=(
-    "christoomey/vim-tmux-navigator"
-    "scrooloose/nerdtree"
-    "mhartington/oceanic-next"
-    "vim-airline/vim-airline"
-    "elixir-editors/vim-elixir"
-    "pangloss/vim-javascript"
-    "junegunn/fzf"
-    "junegunn/fzf.vim"
-    "junegunn/vim-easy-align"
-    "junegunn/goyo"
-    "tpope/vim-tbone"
-    "tpope/vim-scriptease"
-  )
+# source my .bashrc from .bash_profile
+#echo "source ~/.bashrc" >> ~/.bash_profile
 
-  mkdir -p $PACK_DIR && cd $PACK_DIR
-  cd $PACK_DIR
+print_banner "Setting up vanilla vim"
 
-  for plugin in ${PLUGINS[*]};
-  do
-    printf "\nInstalling ---->  %s\n" $plugin
-    #git clone "http://github.com/$plugin"
-    printf "\n"
-    git clone "git@github.com:$plugin"
-  done
-fi
+#if [ -d "$HOME/.vim" ]; then
+#  printf "Seems like there's already a .vim folder...\n"
+#else
+#  PACK_DIR=$HOME/.vim/pack/foo/start/
+#  PLUGINS=(
+#    "christoomey/vim-tmux-navigator"
+#    "scrooloose/nerdtree"
+#    "mhartington/oceanic-next"
+#    "vim-airline/vim-airline"
+#    "elixir-editors/vim-elixir"
+#    "pangloss/vim-javascript"
+#    "junegunn/fzf"
+#    "junegunn/fzf.vim"
+#    "junegunn/vim-easy-align"
+#    "junegunn/goyo"
+#    "tpope/vim-tbone"
+#    "tpope/vim-scriptease"
+#  )
+#
+#  mkdir -p $PACK_DIR && cd $PACK_DIR
+#  cd $PACK_DIR
+#
+#  for plugin in ${PLUGINS[*]};
+#  do
+#    printf "\nInstalling ---->  %s\n" $plugin
+#    #git clone "http://github.com/$plugin"
+#    printf "\n"
+#    git clone "git@github.com:$plugin"
+#  done
+#fi
+
+print_banner "Brew installs"
+  brew upgrade
+
+#  BREW_INSTALLS=(
+#    "ripgrep"
+#    "bat"
+#    "neovim"
+#    "fd"
+#    "fzf"
+#    "coreutils"
+#    "ed"
+#    "findutils"
+#    "gawk"
+#    "gnu-sed"
+#    "gnu-tar"
+#    "grep"
+#    "make"
+#    "chrome-cli"
+#    "delta"
+#    "pandoc"
+#    "postgresql"
+#    "ranger"
+#    "jq"
+#    "yq"
+#    "skhd"
+#    "socat"
+#    "tmuxinator"
+#  )
+#
+#  for install in ${BREW_INSTALLS[*]};
+#  do
+#    brew install $install
+#  done
+#
+#  # install keybindings and completions https://github.com/junegunn/fzf#using-homebrew
+#  $(brew --prefix)/opt/fzf/install
+
+print_banner "Setting up nvim"
+# uhhhhh not sure what this should do yet
 
 printf "\n\n"
 printf 'Successfully Installed!'

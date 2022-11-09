@@ -22,118 +22,145 @@ sudo_create_link() {
   sudo ln -svfh "$PWD/$1" $2
 }
 
-print_banner "Linking dot/* to ~/"
-
-for file in $(find dot -maxdepth 1 -type f -name '.*'); do
-  create_link $file ~/
-done
-
-print_banner "Linking dot_config/* to ~/.config/"
-
-for dir in $(find dot_config -maxdepth 1 -type d | tail -n +2); do
-  create_link $dir ~/.config/
-done
-
-print_banner "Linking bin/* to /usr/local/bin/"
-
-for file in $(find bin -type f -not -name 'deploy*'); do
-  sudo_create_link $file /usr/local/bin/
-done
-
-print_banner "Seting up ~/.logs"
-
-# This goes along with the config in .bashrc regarding keeping daily logs of commands
-if [ -d "$HOME/.logs" ]; then
-  printf "Seems like there's already a .logs folder...\n"
-else
-  mkdir $HOME/.logs
-fi
-
-print_banner "Adding source of .bashrc to .bash_profile"
-
-# source my .bashrc from .bash_profile
-echo "source ~/.bashrc" >> ~/.bash_profile
-
-print_banner "Setting up vanilla vim"
-
-if [ -d "$HOME/.vim" ]; then
-  printf "Seems like there's already a .vim folder...\n"
-else
-  PACK_DIR=$HOME/.vim/pack/foo/start/
-  PLUGINS=(
-    "christoomey/vim-tmux-navigator"
-    "scrooloose/nerdtree"
-    "mhartington/oceanic-next"
-    "vim-airline/vim-airline"
-    "elixir-editors/vim-elixir"
-    "pangloss/vim-javascript"
-    "junegunn/fzf"
-    "junegunn/fzf.vim"
-    "junegunn/vim-easy-align"
-    "junegunn/goyo"
-    "tpope/vim-tbone"
-    "tpope/vim-scriptease"
-  )
-
-  mkdir -p $PACK_DIR && cd $PACK_DIR
-  cd $PACK_DIR
-
-  for plugin in ${PLUGINS[*]};
-  do
-    printf "\nInstalling ---->  %s\n" $plugin
-    git clone "http://github.com/$plugin"
-    #git clone "git@github.com:$plugin"
-    printf "\n"
+link_dotfiles() {
+  print_banner "Linking dot/* to ~/"
+  
+  for file in $(find dot -maxdepth 1 -type f -name '.*'); do
+    create_link $file ~/
   done
-fi
+}
 
-print_banner "Brew installs"
-  brew upgrade
+link_dotdirectories() {
+  print_banner "Linking dot_config/* to ~/.config/"
 
-  BREW_INSTALLS=(
-    "bash-completion"
-    "bat"
-    "chrome-cli"
-    "coreutils"
-    "diffutils"
-    "ed"
-    "fd"
-    "findutils"
-    "fzf"
-    "gawk"
-    "git-delta"
-    "gnu-sed"
-    "gnu-tar"
-    "grep"
-    "jq"
-    "koekeishiya/formulae/skhd"
-    "koekeishiya/formulae/yabai"
-    "make"
-    "moreutils"
-    "neovim"
-    "pandoc"
-    "postgresql@14"
-    "ranger"
-    "ripgrep"
-    "socat"
-    "tmuxinator"
-    "xz"
-    "yq"
-  )
+  for dir in $(find dot_config -maxdepth 1 -type d | tail -n +2); do
+    create_link $dir ~/.config/
+  done
+}
 
-for install in ${BREW_INSTALLS[*]}; do
-  brew install $install
-done
+link_binfiles() {
+  print_banner "Linking bin/* to /usr/local/bin/"
 
-# install keybindings and completions https://github.com/junegunn/fzf#using-homebrew
-$(brew --prefix)/opt/fzf/install
+  for file in $(find bin -type f -not -name 'deploy*'); do
+    sudo_create_link $file /usr/local/bin/
+  done
+}
 
-brew services start skhd
-brew services start yabai
-brew services start postgresql@14
+setup_dotlogs() {
+  print_banner "Seting up ~/.logs"
+
+  # This goes along with the config in .bashrc regarding keeping daily logs of commands
+  if [ -d "$HOME/.logs" ]; then
+    printf "Seems like there's already a .logs folder...\n"
+  else
+    mkdir $HOME/.logs
+  fi
+}
+
+source_bashrc() {
+  print_banner "Adding source of .bashrc to .bash_profile"
+  
+  # source my .bashrc from .bash_profile
+  echo "source ~/.bashrc" >> ~/.bash_profile
+}
+
+setup_vanilla_vim() {
+  print_banner "Setting up vanilla vim"
+
+  if [ -d "$HOME/.vim" ]; then
+    printf "Seems like there's already a .vim folder...\n"
+  else
+    PACK_DIR=$HOME/.vim/pack/foo/start/
+    PLUGINS=(
+      "christoomey/vim-tmux-navigator"
+      "scrooloose/nerdtree"
+      "mhartington/oceanic-next"
+      "vim-airline/vim-airline"
+      "elixir-editors/vim-elixir"
+      "pangloss/vim-javascript"
+      "junegunn/fzf"
+      "junegunn/fzf.vim"
+      "junegunn/vim-easy-align"
+      "junegunn/goyo"
+      "tpope/vim-tbone"
+      "tpope/vim-scriptease"
+    )
+
+    mkdir -p $PACK_DIR && cd $PACK_DIR
+    cd $PACK_DIR
+
+    for plugin in ${PLUGINS[*]};
+    do
+      printf "\nInstalling ---->  %s\n" $plugin
+      git clone "http://github.com/$plugin"
+      #git clone "git@github.com:$plugin"
+      printf "\n"
+    done
+  fi
+}
+
+install_brew_packages() {
+  print_banner "Brew installs"
+    brew upgrade
+  
+    BREW_INSTALLS=(
+      "bash-completion"
+      "bat"
+      "chrome-cli"
+      "coreutils"
+      "diffutils"
+      "ed"
+      "fd"
+      "findutils"
+      "fzf"
+      "gawk"
+      "git-delta"
+      "gnu-sed"
+      "gnu-tar"
+      "grep"
+      "jq"
+      "koekeishiya/formulae/skhd"
+      "koekeishiya/formulae/yabai"
+      "make"
+      "moreutils"
+      "neovim"
+      "pandoc"
+      "postgresql@14"
+      "ranger"
+      "ripgrep"
+      "socat"
+      "tmuxinator"
+      "xz"
+      "yq"
+    )
+  
+  for install in ${BREW_INSTALLS[*]}; do
+    brew install $install
+  done
+  
+  # install keybindings and completions https://github.com/junegunn/fzf#using-homebrew
+  $(brew --prefix)/opt/fzf/install
+  
+  brew services start skhd
+  brew services start yabai
+  brew services start postgresql@14
+}
 
 #print_banner "Setting up nvim"
 ## uhhhhh not sure what this should do yet if anything, have to re-hash how it all works
+#
+
+main() {
+  link_dotfiles
+  link_dotdirectories
+  link_binfiles
+  setup_dotlogs
+  source_bashrc
+  setup_vanilla_vim
+  install_brew_packages
+}
+
+main
 
 printf "\n\n"
 printf 'Successfully Installed!'

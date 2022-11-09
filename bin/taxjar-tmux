@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+tmux split-window -v
+tmux select-pane -U
+tmux split-window -v
+tmux split-window -v
+tmux send-keys "pay ssh" Enter
+tmux send-keys "source bin/devbox_env" Enter
+tmux send-keys "SIDEKIQ_CONCURRENCY=5 bundle exec sidekiq -C config/sidekiq.yml" Enter
+tmux select-pane -U
+tmux send-keys "pay ssh" Enter
+tmux send-keys "source bin/devbox_env" Enter
+tmux send-keys "WEBPACKER_DEV_SERVER_HOST=0.0.0.0 ./bin/webpack-dev-server" Enter
+tmux select-pane -U
+tmux send-keys "pay ssh" Enter
+tmux send-keys "source bin/devbox_env" Enter
+# echo ''"'"'{print $2}'"'"''
+# echo '"'"'{print $2}'"'"'
+tmux send-keys 'lsof -i :3000 | grep LISTEN | awk '"'"'{print $2}'"'"' | xargs kill -9' Enter
+tmux send-keys "bundle exec rails s -b 0.0.0.0 -p 3000" Enter
+tmux select-pane -D
+tmux select-pane -D
+tmux select-pane -D

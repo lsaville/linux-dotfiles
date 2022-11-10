@@ -130,6 +130,7 @@ install_brew_packages() {
       "ripgrep"
       "socat"
       "tmuxinator"
+      "tree"
       "xz"
       "yq"
     )

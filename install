@@ -119,6 +119,7 @@ install_brew_packages() {
       "gnu-tar"
       "grep"
       "jq"
+      "karabiner-elements"
       "koekeishiya/formulae/skhd"
       "koekeishiya/formulae/yabai"
       "make"

@@ -424,6 +424,8 @@ alias bm="bazel build //uppsala/src/main/java/com/stripe/monetization/tax/..."
 # These take about 2 seconds longer than the commands above, but also pull down the latest ENV vars from Confidant onto the dev box.
 # alias sync_env_tj='pay ssh "/pay/src/pay-server/devbox/dev_services/scripts/taxjar/populate_dotenv_files.sh taxjar" && pay copy ~/stripe/taxjar/.env.development.local qa-mydev:/pay/src/taxjar/.env.development.local'
 # alias sync_env_centauri='pay ssh "/pay/src/pay-server/devbox/dev_services/scripts/taxjar/populate_dotenv_files.sh centauri" && pay copy ~/stripe/centauri/.env.development.local qa-mydev:/pay/src/centauri/.env.development.local'
+alias sync_eac_env='pay copy ~/stripe/engine-admin-console/.env.development.local qa-mydev:/pay/src/engine-admin-console/.env.development.local'
+alias sync_taxjar_env='pay copy ~/stripe/taxjar/.env.development.local qa-mydev:/pay/src/taxjar/.env.development.local'
 
 # alias awsume_staging="awsume staging && kubectl config use-context staging"
 # alias awsume_production="awsume production && kubectl config use-context production"
@@ -436,7 +438,7 @@ alias bm="bazel build //uppsala/src/main/java/com/stripe/monetization/tax/..."
 # alias prod_write_console="cd ~/stripe/taxjar-console && docker-compose exec console zsh -i -c 'awsume production && kubectl config use-context production && hatch run -n taxjar-ui -a taxjar rails c'"
 # alias prod_shell="cd ~/stripe/taxjar-console && docker-compose exec console zsh -i -c 'awsume production && kubectl config use-context production && hatch run -n taxjar -a taxjar-ui /bin/bash'"
 # 
-# alias dev_db_tunnel="ssh -L 3333:localhost:5432 '$USER'@'$(pay show-host)'"
+alias dev_db_tunnel="ssh -L 3333:localhost:5432 '$USER'@'$(pay show-host)'"
 # 
 # alias docker-login='awsume default && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 708017133719.dkr.ecr.us-east-1.amazonaws.com'
 

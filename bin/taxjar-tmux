@@ -22,3 +22,4 @@ tmux send-keys "bundle exec rails s -b 0.0.0.0 -p 3000" Enter
 tmux select-pane -D
 tmux select-pane -D
 tmux select-pane -D
+tmux send-keys "pay open taxjar"

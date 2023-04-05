@@ -196,6 +196,7 @@ nnoremap <leader>p :.! cat /tmp/pry-output.json \| jq .<CR>
 function! GimmeFilename()
   execute system('echo -n ' . expand('%') . ' | xclip -sel clip')
 endfunction
+
 "nnoremap <leader>f :silent call GimmeFilename()<CR>
 nnoremap <leader>f :let @+=expand('%')<CR>
 

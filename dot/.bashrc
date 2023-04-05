@@ -57,7 +57,6 @@ alias pnr='git co master-passing-tests && git pull origin master-passing-tests &
 
 alias meow='mpg123 -q ~/git/linux-dotfiles/jaguar2.mp3'
 
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 #alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -286,6 +285,10 @@ alias rc="bundle exec rails c"
 alias norg="gron --ungron"
 alias ungron="gron --ungron"
 
+function va () {
+  fd -E *west_virginia* virginia | xargs rg "$@"
+}
+
 #combo functions from Sal Espinosas bash profile
 function cs () {
   cd "$@" && ls
@@ -336,11 +339,12 @@ export PHANTOMJS_BIN=/home/lee/.phantomjs/phantomjs/bin/phantomjs
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 #export PATH="$HOME/.rbenv/bin:$PATH"
-#export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 # This is a quick fix for awsume... should probably link this elsewhere
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin/
+#export PATH="$PATH:$CARGO_HOME/bin"
 #export NODEJS_HOME=/usr/local/lib/nodejs/node-v11.6.0-linux-x64/bin
 #export PATH=$NODEJS_HOME:$PATH
 
@@ -393,6 +397,7 @@ export FZF_DEFAULT_COMMAND='rg \
 #  ]\""
 
 export PATH=$PATH:$HOME/git/zk/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 export ZK_PATH="$HOME/Dropbox/Zettelkasten"
 
 export DISABLE_SPRING=1
@@ -426,6 +431,8 @@ alias bm="bazel build //uppsala/src/main/java/com/stripe/monetization/tax/..."
 # alias sync_env_centauri='pay ssh "/pay/src/pay-server/devbox/dev_services/scripts/taxjar/populate_dotenv_files.sh centauri" && pay copy ~/stripe/centauri/.env.development.local qa-mydev:/pay/src/centauri/.env.development.local'
 alias sync_eac_env='pay copy ~/stripe/engine-admin-console/.env.development.local qa-mydev:/pay/src/engine-admin-console/.env.development.local'
 alias sync_taxjar_env='pay copy ~/stripe/taxjar/.env.development.local qa-mydev:/pay/src/taxjar/.env.development.local'
+alias sync_filing_api_env='pay copy ~/stripe/filing_api/.env.development.local qa-mydev:/pay/src/filing_api/.env.development.local'
+alias sync_centauri_env='pay copy ~/stripe/centauri/.env.development.local qa-mydev:/pay/src/centauri/.env.development.local'
 
 # alias awsume_staging="awsume staging && kubectl config use-context staging"
 # alias awsume_production="awsume production && kubectl config use-context production"

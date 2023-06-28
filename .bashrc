@@ -269,7 +269,7 @@ alias nuke="bundle exec rake db:drop db:create db:migrate db:seed db:test:prepar
 alias be="bundle exec"
 alias reload='source ~/.bashrc'
 alias o="cs git/optimizely_server/public/optimizely"
-alias fd="rg --hidden --ignore-case"
+#alias fd="rg --hidden --ignore-case"
 alias aep="awsume eac-prod"
 alias aes="awsume eac-staging"
 # "temp time"
@@ -431,3 +431,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 source "$HOME/.cargo/env"
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

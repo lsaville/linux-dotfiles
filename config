@@ -58,9 +58,9 @@ bindsym $mod+u exec --no-startup-id rofi -show emoji -modi emoji
 
 # lock the screen
 # weird things happen with this line... hangs in bg and then tries to fire on sleep?
-#bindsym $mod+x exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+bindsym $mod+x exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 #bindsym $mod+x exec i3lock --color=FF8165
-bindsym $mod+x exec /home/$USER/.config/i3/lock
+#bindsym $mod+x exec /home/$USER/.config/i3/lock
 
 
 # stop and start notifications
@@ -275,7 +275,7 @@ hide_edge_borders both
 bar {
     font pango:SourceCodePro, FontAwesome 5 Free
     position top
-    status_command /usr/bin/i3status-rs .config/i3/status.toml
+    status_command /usr/bin/i3status-rs ~/.config/i3/status.toml
     colors {
         separator #ffffff
         background #222222

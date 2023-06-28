@@ -139,6 +139,8 @@ nnoremap <leader>c :.!awk -F, '{print NF}'<CR>
 " Kill html tags. Makes it easy to manually scrape web-content
 nnoremap <leader>kh :%s/<\([^<]*\)>//g<CR>
 
+vnoremap gy "+y
+
 " comment jsx
 vnoremap <leader>cc :s/\(\s*\)\(.*\)/\1{\/*\2*\/}/ \| :nohl<CR>
 " uncomment jsx
